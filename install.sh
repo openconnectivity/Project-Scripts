@@ -20,25 +20,12 @@ set -x #echo on
 
 CURPWD=`pwd`
 
-if [[ ! -v PYTHONPATH ]]; then
-    export PYTHONPATH='.'
-    echo "export PYTHONPATH='.'" >> ~/.bashrc
-fi
+git clone https://github.com/openconnectivity/Projects-Scripts.git
 
-if [[ ! -v EXAMPLEPATH ]]; then
-    export EXAMPLEPATH='.'
-    echo "export EXAMPLEPATH=`pwd`" >> ~/.bashrc
-fi
-
-git clone https://github.com/openconnectivity/Sample-Raspberry-Pi-Code.git
-
-MY_COMMAND="cp ./Sample-Raspberry-Pi-Code/IoTivity/*.sh ${OCFPATH}/../iot/"
+MY_COMMAND="cp ./Project-Scripts/IoTivity/*.sh ${OCFPATH}/../iot/"
 eval ${MY_COMMAND}
 
-MY_COMMAND="cp ./Sample-Raspberry-Pi-Code/IoTivity-lite/*.sh ${OCFPATH}/../iot-lite/"
+MY_COMMAND="cp ./Project-Scripts/IoTivity-lite/*.sh ${OCFPATH}/../iot-lite/"
 eval ${MY_COMMAND}
-
-curl https://get.pimoroni.com/automationhat | bash
-curl https://get.pimoroni.com/envirophat | bash
 
 cd $CURPWD
