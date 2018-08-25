@@ -1,10 +1,28 @@
+<<<<<<< HEAD
 # Scripts for OCF Project Development
+=======
+# Project Development Scripts
+>>>>>>> origin/master
 
 This repository contains scripts for creating OCF projects in any directory using either IoTivity or IoTivity-lite.
 
 # Installation
 
+<<<<<<< HEAD
 To install all the samples described above, just type the following command.
+=======
+To install all the scripts described above, just type the following command.
+
+- curl https://openconnectivity.github.io/Project-Scripts/install.sh | bash
+
+This command will do a number of things:
+
+- Clone the Sample-Raspberry-Pi-Code repository (which includes all the sample code described above). Each sample subdirectory includes the following files:
+  - SConscript: A scons description file that will manage the compiling and linking of the project.
+  - <sample>.json: The JSON device description file that is the input to DeviceBuilder and describes all the resources available on the device. Each of these resources will show up in the source code and introspection file created by DeviceBuilder.
+  - <sample>.cpp: The C++ code that includes all the resources plus the code to interface to the hardware. This code can be copied over the C++ code created by DeviceBuilder when the gen.sh script is run in order to control the hardware. If you run gen.sh again, <sample>.cpp will be overwritten. So if you change anything in <sample>.cpp, be sure to make a backup or avoid running gen.sh again. Otherwise, you will lose your work.
+  - <sample>.py: The Python code that connects the C++ code to the Pimoroni python libraries. This code will be copied to the executable directory so it will be available at runtime to control the hardware.
+>>>>>>> origin/master
 
 - curl https://openconnectivity.github.io/Project-Scripts/install.sh | bash
 
