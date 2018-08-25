@@ -1,4 +1,4 @@
-# Sample Code for Raspberry Pi
+# Project Development Scripts
 
 This repository contains code for creating an IoTivity server running on the Raspberry Pi. The examples include support for three daughter boards from Pimoroni.
 - automation-hat: This board has support for several digital inputs and outputs and well as 4 analog to digital converters and 3 relays. There is also support for serial interfaces and a number of LEDs.
@@ -12,9 +12,9 @@ In addition to the Pimoroni sample code, there are two other samples.
 
 # Installation
 
-To install all the samples described above, just type the following command. Typically, this would be installed in the ~/iot directory.
+To install all the scripts described above, just type the following command.
 
-- curl https://openconnectivity.github.io/Sample-Raspberry-Pi-Code/pi-boards/install.sh | bash
+- curl https://openconnectivity.github.io/Project-Scripts/install.sh | bash
 
 This command will do a number of things:
 
