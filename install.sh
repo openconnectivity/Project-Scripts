@@ -20,7 +20,7 @@ set -x #echo on
 
 CURPWD=`pwd`
 
-git clone https://github.com/openconnectivity/Projects-Scripts.git
+git clone https://github.com/openconnectivity/Project-Scripts.git
 
 MY_COMMAND="cp ./Project-Scripts/IoTivity/*.sh ${OCFPATH}/../iot/"
 eval ${MY_COMMAND}
