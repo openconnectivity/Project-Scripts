@@ -29,7 +29,9 @@ if [[ ! -v OCFPATH ]]; then
   export PATH=$IMPLEMENTATION_DIR:$PATH
   echo "export PATH=${IMPLEMENTATION_DIR}:${PATH}" >> ~/.bashrc
 else
+  echo "OCFPATH=${OCFPATH}, IMPLEMENTATION_DIR=${IMPLEMENTATION_DIR}"
   sed -i.bak -e "s,${OCFPATH},${IMPLEMENTATION_DIR},g" ~/.bashrc
+  echo "past sed..."
 
 #  PATH | sed -e "s:$OCFPATH:$IMPLEMENTATION_DIR:"
   export OCFPATH=$IMPLEMENTATION_DIR
