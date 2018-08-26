@@ -28,7 +28,7 @@ if [[ ! -v OCFPATH ]]; then
     echo "export PATH=~/iot:${PATH}" >> ~/.bashrc
 fi
 
-git clone https://github.com/openconnectivity/Projects-Scripts.git
+git clone https://github.com/openconnectivity/Project-Scripts.git
 
 MY_COMMAND="cp ./Project-Scripts/IoTivity/*.sh ${OCFPATH}/../iot/"
 eval ${MY_COMMAND}
