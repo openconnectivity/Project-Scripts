@@ -30,8 +30,7 @@ if [[ ! -v OCFPATH ]]; then
   echo "export PATH=${IMPLEMENTATION_DIR}:${PATH}" >> ~/.bashrc
 else
   echo "OCFPATH=${OCFPATH}, IMPLEMENTATION_DIR=${IMPLEMENTATION_DIR}"
-  MY_COMMAND="sed -i.bak -e \"s,${OCFPATH},${IMPLEMENTATION_DIR},g\" ~/.bashrc"
-  eval ${MY_COMMAND}
+  sed -i.bak -e "s,${OCFPATH},${IMPLEMENTATION_DIR},g" ~/.bashrc
   echo "past sed..."
 
 #  PATH | sed -e "s:$OCFPATH:$IMPLEMENTATION_DIR:"
