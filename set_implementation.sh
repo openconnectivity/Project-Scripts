@@ -18,22 +18,24 @@ set -x #echo on
 #
 #############################
 
+IMPLEMENTATION_DIR=$1
+
 CURPWD=`pwd`
 
 if [[ ! -v OCFPATH ]]; then
-    export OCFPATH=~/iot
-    echo "export OCFPATH='~/iot'" >> ~/.bashrc
+  export OCFPATH="$IMPLEMENTATION_DIR"
+  echo "export OCFPATH=$IMPLEMENTATION_DIR" >> ~/.bashrc
 
-    export PATH=~/iot:$PATH
-    echo "export PATH=~/iot:${PATH}" >> ~/.bashrc
+  export PATH=$IMPLEMENTATION_DIR:$PATH
+  echo "export PATH=${IMPLEMENTATION_DIR}:${PATH}" >> ~/.bashrc
+else
+  sed -i.bak -e "s:$OCFPATH:$IMPLEMENTATION_DIR:" ~/.bashrc
+
+  export OCFPATH=$IMPLEMENTATION_DIR
+  echo $PATH | sed -e "s:$OCFPATH:$IMPLEMENTATION_DIR:"
 fi
 
-git clone https://github.com/openconnectivity/Projects-Scripts.git
-
-MY_COMMAND="cp ./Project-Scripts/IoTivity/*.sh ${OCFPATH}/../iot/"
-eval ${MY_COMMAND}
-
-MY_COMMAND="cp ./Project-Scripts/IoTivity-lite/*.sh ${OCFPATH}/../iot-lite/"
-eval ${MY_COMMAND}
+# MY_COMMAND="cp ./Project-Scripts/IoTivity-lite/*.sh ${OCFPATH}/../iot-lite/"
+# eval ${MY_COMMAND}
 
 cd $CURPWD
