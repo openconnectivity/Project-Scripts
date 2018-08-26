@@ -31,8 +31,8 @@ if [[ ! -v OCFPATH ]]; then
 else
   sed -i.bak -e "s:$OCFPATH:$IMPLEMENTATION_DIR:" ~/.bashrc
 
+#  PATH | sed -e "s:$OCFPATH:$IMPLEMENTATION_DIR:"
   export OCFPATH=$IMPLEMENTATION_DIR
-  echo $PATH | sed -e "s:$OCFPATH:$IMPLEMENTATION_DIR:"
 fi
 
 # MY_COMMAND="cp ./Project-Scripts/IoTivity-lite/*.sh ${OCFPATH}/../iot-lite/"
