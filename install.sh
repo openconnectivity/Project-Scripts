@@ -21,11 +21,14 @@ set -x #echo on
 CURPWD=`pwd`
 
 if [[ ! -v OCFPATH ]]; then
-    export OCFPATH=~/iot
-    echo "export OCFPATH='~/iot'" >> ~/.bashrc
+    export OCFSUBPATH=/iot
+    echo "export OCFSUBPATH=${OCFSUBPATH}" >> ~/.bashrc
 
-    export PATH=~/iot:$PATH
-    echo "export PATH=~/iot:${PATH}" >> ~/.bashrc
+    export OCFPATH=${HOME}${OCFSUBPATH}
+    echo "export OCFPATH=${OCFPATH}" >> ~/.bashrc
+
+    export PATH=${OCFPATH}:${PATH}
+    echo "export PATH=${OCFPATH}":'$PATH' >> ~/.bashrc
 fi
 
 git clone https://github.com/openconnectivity/Project-Scripts.git
