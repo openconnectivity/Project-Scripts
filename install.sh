@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x #echo on
+
 #############################
 #
 # copyright 2018 Open Connectivity Foundation, Inc. All rights reserved.
