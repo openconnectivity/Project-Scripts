@@ -1,6 +1,7 @@
 #!/bin/bash
 CURPWD=`pwd`
 PROJNAME=${PWD##*/}
+OLD_PROJECT_NAME=device_builder_server
 
 MY_COMMAND="cd ${OCFPATH}/DeviceBuilder"
 eval ${MY_COMMAND}
@@ -12,6 +13,10 @@ MY_COMMAND="cp $CURPWD/device_output/code/server_introspection.dat.h ${OCFPATH}/
 eval ${MY_COMMAND}
 
 MY_COMMAND="mkdir $CURPWD/bin/${PROJNAME}_creds"
+eval ${MY_COMMAND}
+
+# modify the Makefile to make this project
+MY_COMMAND="sed -i.bak -e \"s,${OLD_PROJECT_NAME},${PROJNAME},g\" $CURPWD/Makefile"
 eval ${MY_COMMAND}
 
 if [ -e $CURPWD/src/$PROJNAME.c ]
