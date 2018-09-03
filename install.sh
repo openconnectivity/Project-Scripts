@@ -33,10 +33,10 @@ fi
 
 git clone https://github.com/openconnectivity/Project-Scripts.git
 
-MY_COMMAND="cp ./Project-Scripts/IoTivity/*.sh ${OCFPATH}/../iot/"
+MY_COMMAND="cp ./Project-Scripts/IoTivity/* ${OCFPATH}/../iot/"
 eval ${MY_COMMAND}
 
-MY_COMMAND="cp ./Project-Scripts/IoTivity-lite/*.sh ${OCFPATH}/../iot-lite/"
+MY_COMMAND="cp ./Project-Scripts/IoTivity-lite/* ${OCFPATH}/../iot-lite/"
 eval ${MY_COMMAND}
 
 cd $CURPWD

@@ -6,9 +6,9 @@ MY_COMMAND="mkdir -p ./$PROJNAME/src"
 eval ${MY_COMMAND}
 MY_COMMAND="mkdir -p ./$PROJNAME/bin"
 eval ${MY_COMMAND}
-MY_COMMAND="cp ${OCFPATH}/example.json ./$PROJNAME/$PROJNAME.json"
+MY_COMMAND="cp ${OCFPATH}/default.json ./$PROJNAME/$PROJNAME.json"
 eval ${MY_COMMAND}
-MY_COMMAND="cp ${OCFPATH}/iotivity-constrained/port/linux/Makefile ./$PROJNAME/"
+MY_COMMAND="cp ${OCFPATH}/default.Makefile ./$PROJNAME/Makefile"
 eval ${MY_COMMAND}
 
 cd $PROJNAME
