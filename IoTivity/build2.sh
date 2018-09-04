@@ -6,7 +6,11 @@ MY_COMMAND="cd ${OCFPATH}/iotivity"
 eval ${MY_COMMAND}
 
 #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over.
-MY_COMMAND="cp $CURPWD/src/$PROJNAME.cpp ${OCFPATH}/iotivity/examples/OCFDeviceBuilder/server.cpp"
+MY_COMMAND="cp $CURPWD/src/*.cpp ${OCFPATH}/iotivity/examples/OCFDeviceBuilder/"
+eval ${MY_COMMAND}
+MY_COMMAND="cp $CURPWD/src/*.h ${OCFPATH}/iotivity/examples/OCFDeviceBuilder/"
+eval ${MY_COMMAND}
+MY_COMMAND="mv -f ${OCFPATH}/iotivity/examples/OCFDeviceBuilder/$PROJNAME.cpp ${OCFPATH}/iotivity/examples/OCFDeviceBuilder/server.cpp"
 eval ${MY_COMMAND}
 
 # copying the SConscript file to the source folder
