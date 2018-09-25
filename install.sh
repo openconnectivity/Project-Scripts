@@ -85,7 +85,7 @@ echo "#make with switches" >> build2.sh
 echo "make DYNAMIC=1 IPV4=1 \${PROJNAME}" >> build2.sh
 echo "#make DYNAMIC=1 \${PROJNAME}" >> build2.sh
 echo "#uncomment to make the debug version" >> build2.sh
-echo "make DYNAMIC=1 DEBUG=1 \${PROJNAME}" >> build2.sh
+echo "#make DYNAMIC=1 DEBUG=1 \${PROJNAME}" >> build2.sh
 echo "" >> build2.sh
 echo "#TODO remove this command once the above problem is fixed" >> build2.sh
 echo "rm -rf \${OCFPATH}/iotivity-constrained/port/linux/\${PROJNAME}_creds" >> build2.sh
