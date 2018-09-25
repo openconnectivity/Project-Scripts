@@ -41,26 +41,26 @@ git clone https://github.com/openconnectivity/Project-Scripts.git
 
 # create the build2 script with the correct OS stuff
 cd IoTivity
-echo "#!/bin/bash" > build3.sh
-echo "CURPWD=`pwd`" >> build3.sh
-echo "PROJNAME=\${PWD##*/}" >> build3.sh
-echo "" >> build3.sh
-echo "cd \${OCFPATH}/iotivity/" >> build3.sh
-echo "" >> build3.sh
-echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build3.sh
-echo "cp \$CURPWD/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/" >> build3.sh
-echo "cp \$CURPWD/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/" >> build3.sh
-echo "mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCFPATH}/iotivity/examples/${code_path}/server.cpp" >> build3.sh
-echo "" >> build3.sh
-echo "# copying the SConscript file to the source folder" >> build3.sh
-echo "cp \$CURPWD/SConscript \${OCFPATH}/iotivity/examples/${code_path}/" >> build3.sh
-echo "" >> build3.sh
-echo "scons examples/${code_path}" >> build3.sh
-echo "" >> build3.sh
-echo "#TODO remove this command once the above problem is fixed" >> build3.sh
-echo "cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/${code_path}/server /\${CURPWD}/bin/\${PROJNAME}" >> build3.sh
-echo "" >> build3.sh
-echo "cd \$CURPWD" >> build3.sh
+echo "#!/bin/bash" > build2.sh
+echo "CURPWD=`pwd`" >> build2.sh
+echo "PROJNAME=\${PWD##*/}" >> build2.sh
+echo "" >> build2.sh
+echo "cd \${OCFPATH}/iotivity/" >> build2.sh
+echo "" >> build2.sh
+echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build2.sh
+echo "cp \$CURPWD/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/" >> build2.sh
+echo "cp \$CURPWD/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/" >> build2.sh
+echo "mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCFPATH}/iotivity/examples/${code_path}/server.cpp" >> build2.sh
+echo "" >> build2.sh
+echo "# copying the SConscript file to the source folder" >> build2.sh
+echo "cp \$CURPWD/SConscript \${OCFPATH}/iotivity/examples/${code_path}/" >> build2.sh
+echo "" >> build2.sh
+echo "scons examples/${code_path}" >> build2.sh
+echo "" >> build2.sh
+echo "#TODO remove this command once the above problem is fixed" >> build2.sh
+echo "cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/${code_path}/server /\${CURPWD}/bin/\${PROJNAME}" >> build2.sh
+echo "" >> build2.sh
+echo "cd \$CURPWD" >> build2.sh
 
 cd ..
 
