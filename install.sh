@@ -50,12 +50,12 @@ echo "" >> build2.sh
 echo "cd \${OCFPATH}/iotivity/" >> build2.sh
 echo "" >> build2.sh
 echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build2.sh
-echo "cp \$CURPWD/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/" >> build2.sh
-echo "cp \$CURPWD/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/" >> build2.sh
+echo "cp \${CURPWD}/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/" >> build2.sh
+echo "cp \${CURPWD}/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/" >> build2.sh
 echo "mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCFPATH}/iotivity/examples/${code_path}/server.cpp" >> build2.sh
 echo "" >> build2.sh
 echo "# copying the SConscript file to the source folder" >> build2.sh
-echo "cp \$CURPWD/SConscript \${OCFPATH}/iotivity/examples/${code_path}/" >> build2.sh
+echo "cp \${CURPWD}/SConscript \${OCFPATH}/iotivity/examples/${code_path}/" >> build2.sh
 echo "" >> build2.sh
 echo "scons examples/${code_path}" >> build2.sh
 echo "" >> build2.sh
@@ -101,4 +101,4 @@ cp ./Project-Scripts/IoTivity/* ${OCFPATH}/../iot/
 
 cp ./Project-Scripts/IoTivity-lite/* ${OCFPATH}/../iot-lite/
 
-cd $CURPWD
+cd ${CURPWD}
