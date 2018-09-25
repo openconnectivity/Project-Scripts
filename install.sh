@@ -39,7 +39,7 @@ fi
 
 git clone https://github.com/openconnectivity/Project-Scripts.git
 
-# create the build2 script with the correct OS stuff
+# create the build2 script with the correct OS stuff for IoTivity
 cd IoTivity
 echo "#!/bin/bash" > build2.sh
 echo "CURPWD=`pwd`" >> build2.sh
@@ -61,7 +61,38 @@ echo "#TODO remove this command once the above problem is fixed" >> build2.sh
 echo "cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/${code_path}/server /\${CURPWD}/bin/\${PROJNAME}" >> build2.sh
 echo "" >> build2.sh
 echo "cd \$CURPWD" >> build2.sh
+cd ..
 
+# create the build2 script with the correct OS stuff for IoTivity-lite
+cd IoTivity-lite
+echo "#!/bin/bash" > build2.sh
+echo "CURPWD=`pwd`" >> build2.sh
+echo "PROJNAME=\${PWD##*/}" >> build2.sh
+echo "" >> build2.sh
+echo "cd \${OCFPATH}/iotivity-constrained/port/linux" >> build2.sh
+echo "" >> build2.sh
+echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build2.sh
+echo "cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-constrained/apps/" >> build2.sh
+echo "" >> build2.sh
+echo "# Copying the Makefile file to the executable folder" >> build2.sh
+echo "cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-constrained/port/linux/" >> build2.sh
+echo "#comment out one of the next lines to build another port"
+for d in ${OCFPATH}/iot-lite/iotivity-constrained/port/*/ ; do
+  echo "#cd $d" >> build2.sh
+done
+echo "" >> build2.sh
+echo "#make with switches" >> build2.sh
+echo "make DYNAMIC=1 IPV4=1 \${PROJNAME}" >> build2.sh
+echo "#make DYNAMIC=1 \${PROJNAME}" >> build2.sh
+echo "#uncomment to make the debug version" >> build2.sh
+echo "make DYNAMIC=1 DEBUG=1 \${PROJNAME}" >> build2.sh
+echo "" >> build2.sh
+echo "#TODO remove this command once the above problem is fixed" >> build2.sh
+echo "rm -rf \${OCFPATH}/iotivity-constrained/port/linux/\${PROJNAME}_creds" >> build2.sh
+echo "rm \${OCFPATH}/iotivity-constrained/apps/\${PROJNAME}.c" >> build2.sh
+echo "mv ./\${PROJNAME} /\${CURPWD}/bin/" >> build2.sh
+echo "" >> build2.sh
+echo "cd \${CURPWD}" >> build2.sh
 cd ..
 
 cp ./Project-Scripts/IoTivity/* ${OCFPATH}/../iot/
