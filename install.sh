@@ -42,7 +42,7 @@ fi
 git clone https://github.com/openconnectivity/Project-Scripts.git
 
 # create the build2 script with the correct OS stuff for IoTivity
-cd IoTivity
+cd ${CURPWD}/Project-Scripts/IoTivity
 echo "#!/bin/bash" > build2.sh
 echo "CURPWD=\`pwd\`" >> build2.sh
 echo "PROJNAME=\${PWD##*/}" >> build2.sh
@@ -63,10 +63,12 @@ echo "#TODO remove this command once the above problem is fixed" >> build2.sh
 echo "cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/${code_path}/server /\${CURPWD}/bin/\${PROJNAME}" >> build2.sh
 echo "" >> build2.sh
 echo "cd \$CURPWD" >> build2.sh
-cd ..
+
+cp ${CURPWD}/Project-Scripts/IoTivity/* ${OCFPATH}/../iot/
+cd ${CURPWD}
 
 # create the build2 script with the correct OS stuff for IoTivity-lite
-cd IoTivity-lite
+cd ${CURPWD}/Project-Scripts/IoTivity-lite
 echo "#!/bin/bash" > build2.sh
 echo "CURPWD=\`pwd\`" >> build2.sh
 echo "PROJNAME=\${PWD##*/}" >> build2.sh
@@ -95,10 +97,6 @@ echo "rm \${OCFPATH}/iotivity-constrained/apps/\${PROJNAME}.c" >> build2.sh
 echo "mv ./\${PROJNAME} /\${CURPWD}/bin/" >> build2.sh
 echo "" >> build2.sh
 echo "cd \${CURPWD}" >> build2.sh
-cd ..
 
-cp ./Project-Scripts/IoTivity/* ${OCFPATH}/../iot/
-
-cp ./Project-Scripts/IoTivity-lite/* ${OCFPATH}/../iot-lite/
-
+cp ${CURPWD}/Project-Scripts/IoTivity-lite/* ${OCFPATH}/../iot-lite/
 cd ${CURPWD}
