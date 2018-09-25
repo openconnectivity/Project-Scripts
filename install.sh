@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 #############################
 #
 # copyright 2018 Open Connectivity Foundation, Inc. All rights reserved.
