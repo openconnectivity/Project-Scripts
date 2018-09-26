@@ -71,15 +71,13 @@ echo "#!/bin/bash" > build2.sh
 echo "CURPWD=\`pwd\`" >> build2.sh
 echo "PROJNAME=\${PWD##*/}" >> build2.sh
 echo "" >> build2.sh
-echo "cd \${OCFPATH}/iotivity-constrained/port/linux" >> build2.sh
-echo "" >> build2.sh
 echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build2.sh
 echo "cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-constrained/apps/" >> build2.sh
 echo "" >> build2.sh
 echo "# Copying the Makefile file to the executable folder" >> build2.sh
 echo "cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-constrained/port/linux/" >> build2.sh
 
-echo "cd ${OCFPATH}/iotivity-constrained/port/linux/" >> build2.sh
+echo "cd \${OCFPATH}/iotivity-constrained/port/linux/" >> build2.sh
 echo "#comment out one of the next lines to build another port" >> build2.sh
 for d in ${OCFPATH}/iotivity-constrained/port/*/ ; do
     echo "#cd $d" >> build2.sh
