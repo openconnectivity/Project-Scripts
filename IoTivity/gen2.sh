@@ -3,7 +3,7 @@ CURPWD=`pwd`
 PROJNAME=${PWD##*/}
 
 cd ${OCFPATH}/DeviceBuilder
-MY_COMMAND="sh ./DeviceBuilder_C++IotivityServer.sh $CURPWD/$PROJNAME.json  $CURPWD/device_output \"oic.d.widget\""
+MY_COMMAND="sh ./DeviceBuilder_C++IotivityServer.sh ${CURPWD}/${PROJNAME}.json  ${CURPWD}/device_output \"oic.d.widget\""
 eval ${MY_COMMAND}
 
 # copying the introspection file to the executable folder

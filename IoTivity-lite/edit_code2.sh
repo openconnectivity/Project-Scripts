@@ -1,3 +1,3 @@
 #!/bin/bash
 PROJNAME=${PWD##*/}
-nano ./src/$PROJNAME.c
+nano ./src/${PROJNAME}.c

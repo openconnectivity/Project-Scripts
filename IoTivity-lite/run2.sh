@@ -4,6 +4,5 @@ PROJNAME=${PWD##*/}
 
 cd ./bin
 
-MY_COMMAND="./$PROJNAME"
-eval ${MY_COMMAND}
-cd $CURPWD
+./${PROJNAME}
+cd ${CURPWD}
