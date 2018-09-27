@@ -21,7 +21,7 @@ then
   echo "It appears that you have modified the automatically generated source file. Use a tool like diff3 if you want to merge in any changes."
 else
   cp ${CURPWD}/device_output/code/simpleserver.c ${CURPWD}/src/${PROJNAME}.c
-  cp ${CURPWD}/device_output/code/simpleserver.c ${CURPWD}/src/${PROJNAME}-gen.c"
+  cp ${CURPWD}/device_output/code/simpleserver.c ${CURPWD}/src/${PROJNAME}-gen.c
 fi
 
 cd ${CURPWD}
