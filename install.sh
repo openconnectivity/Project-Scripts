@@ -51,15 +51,15 @@ echo "OCFBASEPATH=\`jq '.ocf_base_path' \${CURPWD}/\${PROJNAME}-config.json | tr
 echo "DEVICETYPE=\`jq '.device_type' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> gen3.sh
 echo "DEVICENAME=\`jq '.friendly_name' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> gen3.sh
 echo "" >> gen3.sh
-echo "\#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> gen3.sh
+echo "#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> gen3.sh
 echo "OCFSUBPATH=\`jq '.implementation_paths[0]' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> gen3.sh
 echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> gen3.sh
 echo "PLATFORM=\`jq '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> gen3.sh
 echo "" >> gen3.sh
-echo "\# extract device description and create input file from config file" >> gen3.sh
+echo "# extract device description and create input file from config file" >> gen3.sh
 echo "jq '.device_description' \${CURPWD}/\${PROJNAME}-config.json > \${CURPWD}/\${PROJNAME}.json" >> gen3.sh
 echo "" >> gen3.sh
-echo "\# The lines above parse the config file and set everything up for the normal gen2.sh stuff below" >> gen3.sh
+echo "# The lines above parse the config file and set everything up for the normal gen2.sh stuff below" >> gen3.sh
 echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen3.sh
 echo "eval \${MY_COMMAND}" >> gen3.sh
 echo "pwd" >> gen3.sh
@@ -68,10 +68,10 @@ echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> gen3.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"" >> gen3.sh
 echo "  eval \${MY_COMMAND}" >> gen3.sh
 echo "" >> gen3.sh
-echo "  \# copying the introspection file to the executable folder" >> gen3.sh
+echo "  # copying the introspection file to the executable folder" >> gen3.sh
 echo "  cp -f \${CURPWD}/device_output/code/server_introspection.dat \${CURPWD}/bin/" >> gen3.sh
 echo "" >> gen3.sh
-echo "  \# quick fix: using the iotivity supplied oic_svr_db_server_justworks.dat file" >> gen3.sh
+echo "  # quick fix: using the iotivity supplied oic_svr_db_server_justworks.dat file" >> gen3.sh
 echo "  MY_COMMAND=\"cp -f \${OCFPATH}/iotivity/resource/csdk/security/provisioning/sample/oic_svr_db_server_justworks.dat \${CURPWD}/bin/server_security.dat\"" >> gen3.sh
 echo "  eval \${MY_COMMAND}" >> gen3.sh
 echo "" >> gen3.sh
@@ -86,15 +86,15 @@ echo "elif [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen3.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"" >> gen3.sh
 echo "  eval \${MY_COMMAND}" >> gen3.sh
 echo "" >> gen3.sh
-echo "  \#temp" >> gen3.sh
+echo "  #temp" >> gen3.sh
 echo "  cp \${OCFPATH}/device_output/code/server_introspection.dat.h \${CURPWD}/device_output/code/" >> gen3.sh
 echo "" >> gen3.sh
-echo "  \# copying the introspection file to the include folder" >> gen3.sh
+echo "  # copying the introspection file to the include folder" >> gen3.sh
 echo "  cp \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-constrained/include/" >> gen3.sh
 echo "" >> gen3.sh
 echo "  mkdir \${CURPWD}/bin/\${PROJNAME}_creds" >> gen3.sh
 echo "" >> gen3.sh
-echo "  \# modify the Makefile to make this project" >> gen3.sh
+echo "  # modify the Makefile to make this project" >> gen3.sh
 echo "  MY_COMMAND=\"sed -i.bak -e \\\"s,\${OLD_PROJECT_NAME},\${PROJNAME},g\\\" \${CURPWD}/Makefile\"" >> gen3.sh
 echo "  eval \${MY_COMMAND}" >> gen3.sh
 echo "" >> gen3.sh
@@ -142,7 +142,7 @@ echo "OCFBASEPATH=\`jq '.ocf_base_path' \${CURPWD}/\${PROJNAME}-config.json | tr
 echo "DEVICETYPE=\`jq '.device_type' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> build3.sh
 echo "DEVICENAME=\`jq '.friendly_name' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> build3.sh
 echo "" >> build3.sh
-echo "\#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> build3.sh
+echo "#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> build3.sh
 echo "OCFSUBPATH=\`jq '.implementation_paths[0]' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> build3.sh
 echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> build3.sh
 echo "PLATFORM=\`jq '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> build3.sh
@@ -204,7 +204,7 @@ echo "OCFBASEPATH=\`jq '.ocf_base_path' \${CURPWD}/\${PROJNAME}-config.json | tr
 echo "DEVICETYPE=\`jq '.device_type' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> build3.sh
 echo "DEVICENAME=\`jq '.friendly_name' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> build3.sh
 echo "" >> build3.sh
-echo "\#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> build3.sh
+echo "#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> build3.sh
 echo "OCFSUBPATH=\`jq '.implementation_paths[0]' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> build3.sh
 echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> build3.sh
 echo "PLATFORM=\`jq '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json | tr -d \\\"\`" >> build3.sh
