@@ -151,7 +151,7 @@ echo "  mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCF
 echo "" >> build3.sh
 echo "  # copying the SConscript file to the source folder" >> build3.sh
 echo "  cp \${OCFPATH}/default.SConscript ./\${PROJNAME}/SConscript" >> build3.sh
-echo "" >> build3.#!/bin/sh
+echo "" >> build3.sh
 echo "  scons examples/${code_path}" >> build3.sh
 echo "" >> build3.sh
 echo "  #TODO remove this command once the above problem is fixed" >> build3.sh
