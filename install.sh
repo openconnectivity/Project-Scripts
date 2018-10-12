@@ -147,8 +147,10 @@ echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity/\"" >> build3.sh
 echo "  eval \${MY_COMMAND}" >> build3.sh
 echo "" >> build3.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build3.sh
-echo "  cp \${CURPWD}/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/" >> build3.sh
-echo "  cp \${CURPWD}/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/" >> build3.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build3.sh
+echo "  eval \${MY_COMMAND}" >> build3.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build3.sh
+echo "  eval \${MY_COMMAND}" >> build3.sh
 echo "  MY_COMMAND=\"mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCFPATH}/iotivity/examples/${code_path}/server.cpp\"" >> build3.sh
 echo "  eval \${MY_COMMAND}" >> build3.sh
 echo "" >> build3.sh
