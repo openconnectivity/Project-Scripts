@@ -66,7 +66,7 @@ echo "pwd" >> gen3.sh
 echo "" >> gen3.sh
 echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> gen3.sh
 echo "  if [ ! -e ./\${PROJNAME}/SConscript ]; then" >> gen3.sh
-echo "    MY_COMMAND=\"cp ${OCFPATH}/default.SConscript ./${PROJNAME}/SConscript\"" >> gen3.sh
+echo "    MY_COMMAND=\"cp \${OCFPATH}/default.SConscript ./\${PROJNAME}/SConscript\"" >> gen3.sh
 echo "    eval \${MY_COMMAND}" >> gen3.sh
 echo "  fi" >> gen3.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen3.sh
@@ -88,7 +88,7 @@ echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJN
 echo "  fi" >> gen3.sh
 echo "elif [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen3.sh
 echo "  if [ ! -e ./\${PROJNAME}/Makefile ]; then" >> gen3.sh
-echo "    MY_COMMAND=\"cp ${OCFPATH}/default.Makefile ./${PROJNAME}/Makefile\"" >> gen3.sh
+echo "    MY_COMMAND=\"cp \${OCFPATH}/default.Makefile ./\${PROJNAME}/Makefile\"" >> gen3.sh
 echo "    eval \${MY_COMMAND}" >> gen3.sh
 echo "  fi" >> gen3.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen3.sh
