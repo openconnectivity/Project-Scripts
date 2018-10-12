@@ -87,7 +87,7 @@ echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJ
 echo "  eval \${MY_COMMAND}" >> gen3.sh
 echo "" >> gen3.sh
 echo "  # copying the introspection file to the include folder" >> gen3.sh
-echo "  cp \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-constrained/include/" >> gen3.sh
+echo "  cp -f \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-constrained/include/" >> gen3.sh
 echo "" >> gen3.sh
 echo "  mkdir \${CURPWD}/bin/\${PROJNAME}_creds" >> gen3.sh
 echo "" >> gen3.sh
