@@ -1,6 +1,6 @@
 #!/bin/bash
 PROJNAME=${PWD##*/}
-OCFSUBPATH=`jq '.implementation_paths[0]' ${CURPWD}/${PROJNAME}-config.json | tr -d \"`
+OCFSUBPATH=`jq --raw-output '.implementation_paths[0]' ${CURPWD}/${PROJNAME}-config.json`
 
 if [ "$OCFSUBPATH" == "/iot" ]; then
   nano ./src/${PROJNAME}.cpp
