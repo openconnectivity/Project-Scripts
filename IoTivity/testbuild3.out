@@ -1,0 +1,39 @@
+pi@raspberrypi:~/workspace/explorer $ bash -x build3.sh
+++ pwd
++ CURPWD=/home/pi/workspace/explorer
++ PROJNAME=explorer
+++ jq .ocf_base_path /home/pi/workspace/explorer/explorer-config.json
+++ tr -d '"'
++ OCFBASEPATH='~'
+++ jq .device_type /home/pi/workspace/explorer/explorer-config.json
+++ tr -d '"'
++ DEVICETYPE=oic.d.cooldevice
+++ jq .friendly_name /home/pi/workspace/explorer/explorer-config.json
+++ tr -d '"'
++ DEVICENAME='Cool Device'
+++ jq '.implementation_paths[0]' /home/pi/workspace/explorer/explorer-config.json
+++ tr -d '"'
++ OCFSUBPATH=/iot
++ OCFPATH='~/iot'
+++ jq '.platforms[0]' /home/pi/workspace/explorer/explorer-config.json
+++ tr -d '"'
++ PLATFORM=linux
++ '[' /iot == /iot ']'
++ cd '~/iot/iotivity/'
+/home/pi/iot/build3.sh: line 14: cd: ~/iot/iotivity/: No such file or directory
++ cp /home/pi/workspace/explorer/src/explorer.cpp /home/pi/workspace/explorer/src/explorer-gen.cpp /home/pi/workspace/explorer/src/observer.cpp '~/iot/iotivity/examples/OCFDeviceBuilder/'
+cp: target '~/iot/iotivity/examples/OCFDeviceBuilder/' is not a directory
++ cp /home/pi/workspace/explorer/src/namedefs.h /home/pi/workspace/explorer/src/observer.h '~/iot/iotivity/examples/OCFDeviceBuilder/'
+cp: target '~/iot/iotivity/examples/OCFDeviceBuilder/' is not a directory
++ mv -f '~/iot/iotivity/examples/OCFDeviceBuilder/explorer.cpp' '~/iot/iotivity/examples/OCFDeviceBuilder/server.cpp'
+mv: cannot stat '~/iot/iotivity/examples/OCFDeviceBuilder/explorer.cpp': No such file or directory
++ cp /home/pi/workspace/explorer/SConscript '~/iot/iotivity/examples/OCFDeviceBuilder/'
+cp: cannot create regular file '~/iot/iotivity/examples/OCFDeviceBuilder/': No such file or directory
++ scons examples/OCFDeviceBuilder
+
+scons: *** No SConstruct file found.
+File "/usr/lib/scons/SCons/Script/Main.py", line 912, in _main
++ cp '~/iot/iotivity/out/linux/armv7l/release/examples/OCFDeviceBuilder/server' //home/pi/workspace/explorer/bin/explorer
+cp: cannot stat '~/iot/iotivity/out/linux/armv7l/release/examples/OCFDeviceBuilder/server': No such file or directory
++ cd /home/pi/workspace/explorer
+pi@raspberrypi:~/workspace/explorer $

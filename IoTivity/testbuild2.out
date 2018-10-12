@@ -1,0 +1,155 @@
+pi@raspberrypi:~/workspace/explorer $ bash -x build2.sh
+++ pwd
++ CURPWD=/home/pi/workspace/explorer
++ PROJNAME=explorer
++ cd /home/pi/iot/iotivity/
++ cp /home/pi/workspace/explorer/src/explorer.cpp /home/pi/workspace/explorer/src/explorer-gen.cpp /home/pi/workspace/explorer/src/observer.cpp /home/pi/iot/iotivity/examples/OCFDeviceBuilder/
++ cp /home/pi/workspace/explorer/src/namedefs.h /home/pi/workspace/explorer/src/observer.h /home/pi/iot/iotivity/examples/OCFDeviceBuilder/
++ mv -f /home/pi/iot/iotivity/examples/OCFDeviceBuilder/explorer.cpp /home/pi/iot/iotivity/examples/OCFDeviceBuilder/server.cpp
++ cp /home/pi/workspace/explorer/SConscript /home/pi/iot/iotivity/examples/OCFDeviceBuilder/
++ scons examples/OCFDeviceBuilder
+scons: Reading SConscript files ...
+Checking for POSIX Thread Support...(cached) yes
+HEAD is now at acf202a Fix stack corruption due to calling convention mismatch
+
+******************************* Info: *****************************************
+* Using FORKED copy of libCoap located in:
+* resource/csdk/connectivity/lib/libcoap-4.1.1
+*******************************************************************************
+
+Given Transport is ALL
+Given OS is linux
+BUILD_SAMPLE is ON
+MQ flag is OFF
+Reading ca script ALL
+Reading common folder script
+Reading util folder script
+Copied IoTivity version of config.h to /home/pi/iot/iotivity/extlibs/mbedtls/mbedtls/include/mbedtls/config.h
+Reading IP adapter script
+Reading BLE adapter script for linux
+Reading IP adapter script
+Reading BLE adapter script for linux
+
+scons: warning: Two different environments were specified for target org.iotivity.gatt.service.conf,
+	but they appear to have the same action: _action(target, source, env)
+File "/home/pi/iot/iotivity/resource/csdk/connectivity/src/bt_le_adapter/linux/SConscript", line 53, in <module>
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+*** Checking for installation of hippomocks ***
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+*** Checking for installation of hippomocks ***
+Checking for C library mraa... (cached) yes
+Checking for C++ header file mraa.hpp... (cached) yes
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+*** Checking for installation of hippomocks ***
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C library curl... (cached) yes
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Checking for C++ library boost_thread... (cached) yes
+Checking for C++ library boost_system... (cached) yes
+easysetup_path .
+Files path is None
+Reading top Zigbee Wrapper.
+Reading top Telegesis Wrapper.
+Reading Telegesis Wrapper (TW) script
+Reading Zigbee Wrapper (ZW) script
+Reading PI script
+*** Checking for installation of google unit test 1.7.0 ***
+Making google unit test
+Configuring using [/home/pi/iot/iotivity/extlibs/gtest/googletest-release-1.7.0/make] ...
+Reading MPM Common Plugin script
+Reading MPM script
+Reading LifX Plugin script
+Reading Hue Plugin script
+Reading Nest Plugin script
+Reading Lyric Plugin script
+scons: done reading SConscript files.
+scons: Building targets ...
+scons: building associated VariantDir targets: out/linux/armv7l/release/examples/OCFDeviceBuilder
+scons: `examples/OCFDeviceBuilder' is up to date.
+scons: done building targets.
++ cp /home/pi/iot/iotivity/out/linux/armv7l/release/examples/OCFDeviceBuilder/server //home/pi/workspace/explorer/bin/explorer
++ cd /home/pi/workspace/explorer
+pi@raspberrypi:~/workspace/explorer $
