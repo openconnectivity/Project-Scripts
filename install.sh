@@ -151,7 +151,7 @@ echo "  cp \${CURPWD}/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/" >> bu
 echo "  mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCFPATH}/iotivity/examples/${code_path}/server.cpp" >> build3.sh
 echo "" >> build3.sh
 echo "  # copying the SConscript file to the source folder" >> build3.sh
-echo "  cp \${OCFPATH}/default.SConscript ./\${PROJNAME}/SConscript" >> build3.sh
+echo "  cp \${CURPWD}/SConscript \${OCFPATH}/iotivity/examples/OCFDeviceBuilder/" >> build3.sh
 echo "" >> build3.sh
 echo "  scons examples/${code_path}" >> build3.sh
 echo "" >> build3.sh
