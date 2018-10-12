@@ -86,9 +86,6 @@ echo "elif [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen3.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen3.sh
 echo "  eval \${MY_COMMAND}" >> gen3.sh
 echo "" >> gen3.sh
-echo "  #temp" >> gen3.sh
-echo "  cp \${OCFPATH}/device_output/code/server_introspection.dat.h \${CURPWD}/device_output/code/" >> gen3.sh
-echo "" >> gen3.sh
 echo "  # copying the introspection file to the include folder" >> gen3.sh
 echo "  cp \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-constrained/include/" >> gen3.sh
 echo "" >> gen3.sh
