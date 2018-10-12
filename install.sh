@@ -39,6 +39,8 @@ fi
 
 git clone https://github.com/openconnectivity/Project-Scripts.git
 
+sudo apt-get install jq
+
 # create the build2 script with the correct OS stuff for IoTivity
 cd ${CURPWD}/Project-Scripts/IoTivity
 echo "#!/bin/bash" > build2.sh
