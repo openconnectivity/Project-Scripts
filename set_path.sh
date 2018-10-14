@@ -18,20 +18,15 @@
 #
 #############################
 
-NEW_IMPLEMENTATION_DIR=$1
-
 CURPWD=`pwd`
+SCRIPTPATH=${CURPWD}Project-Scripts
 
-if [ path does not contain "/iot" ]; then
-  export PATH="~/iot":${PATH}
+if [ ! [ ${SCRIPTPATH} == *${PATH}* ]]; then
+  # update the PATH environment variable: NEED TO RUN THIS SCRIPT WITH "source set_path.sh"
+  export PATH=${SCRIPTPATH}:${PATH}
 
-# modify the ~/.bashrc file so things are set correctly on boot
-  echo "export PATH=~/iot":'$PATH' >> ~/.bashrc
-else
-  # update the ~/.bashrc file so things are set correctly on boot
-  MY_COMMAND="sed -i.bak -e \"s,${OLD_IMPLEMENTATION_DIR},${NEW_IMPLEMENTATION_DIR},g\" ~/.bashrc"
-  eval ${MY_COMMAND}
-  export PATH=${PATH//${OLD_IMPLEMENTATION_DIR}/${NEW_IMPLEMENTATION_DIR}}
+  # modify the ~/.bashrc file so things are set correctly on boot
+  echo "export PATH=${SCRIPTPATH}":'$PATH' >> ~/.bashrc
 fi
 
-cd $CURPWD
+cd ${CURPWD}
