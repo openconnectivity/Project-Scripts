@@ -1,4 +1,5 @@
 #!/bin/bash
+CURPWD=`pwd`
 PROJNAME=${PWD##*/}
 OCFBASEPATH=`jq --raw-output '.ocf_base_path' ${CURPWD}/${PROJNAME}-config.json`
 

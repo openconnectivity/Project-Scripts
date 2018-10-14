@@ -1,4 +1,5 @@
 #!/bin/bash
+CURPWD=`pwd`
 PROJNAME=${PWD##*/}
 OCFSUBPATH=`jq --raw-output '.implementation_paths[0]' ${CURPWD}/${PROJNAME}-config.json`
 
