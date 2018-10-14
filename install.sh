@@ -41,7 +41,7 @@ git clone https://github.com/openconnectivity/Project-Scripts.git
 
 sudo apt-get install jq
 
-# create the build3 script with the new config file
+# create the gen script for the config file
 cd ${CURPWD}/Project-Scripts/
 echo "#!/bin/bash" > gen.sh
 echo "CURPWD=\`pwd\`" >> gen.sh
@@ -115,6 +115,7 @@ echo "else" >> gen.sh
 echo "  echo \"No OCFSUBPATH: \$OCFSUBPATH\"" >> gen.sh
 echo "fi" >> gen.sh
 
+# create the build script for the config file
 echo "#!/bin/bash" > build.sh
 echo "CURPWD=\`pwd\`" >> build.sh
 echo "PROJNAME=\${PWD##*/}" >> build.sh
