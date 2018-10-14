@@ -26,15 +26,14 @@ code_path=OCFDeviceBuilder
 
 CURPWD=`pwd`
 
-if [[ ! -v OCFPATH ]]; then
-    export OCFSUBPATH=/iot
-    echo "export OCFSUBPATH=${OCFSUBPATH}" >> ~/.bashrc
+SCRIPTPATH=${CURPWD}/Project-Scripts
 
-    export OCFPATH=${HOME}${OCFSUBPATH}
-    echo "export OCFPATH=${OCFPATH}" >> ~/.bashrc
+if [[ ! (${PATH} == *${SCRIPTPATH}*) ]]; then
+  # update the PATH environment variable: NEED TO RUN THIS SCRIPT WITH "source set_path.sh"
+  export PATH=${SCRIPTPATH}:${PATH}
 
-    export PATH=${OCFPATH}:${PATH}
-    echo "export PATH=${OCFPATH}":'$PATH' >> ~/.bashrc
+  # modify the ~/.bashrc file so things are set correctly on boot
+  echo "export PATH=${SCRIPTPATH}":'$PATH' >> ~/.bashrc
 fi
 
 git clone https://github.com/openconnectivity/Project-Scripts.git
