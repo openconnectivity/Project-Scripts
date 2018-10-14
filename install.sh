@@ -42,88 +42,150 @@ git clone https://github.com/openconnectivity/Project-Scripts.git
 sudo apt-get install jq
 
 # create the build3 script with the new config file
-cd ${CURPWD}/Project-Scripts/IoTivity
-echo "#!/bin/bash" > gen3.sh
-echo "CURPWD=\`pwd\`" >> gen3.sh
-echo "PROJNAME=\${PWD##*/}" >> gen3.sh
-echo "OLD_PROJECT_NAME=device_builder_server" >> gen3.sh
-echo "OCFBASEPATH=\`jq --raw-output '.ocf_base_path' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen3.sh
-echo "DEVICETYPE=\`jq --raw-output '.device_type' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen3.sh
-echo "DEVICENAME=\`jq --raw-output '.friendly_name' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen3.sh
-echo "" >> gen3.sh
-echo "#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> gen3.sh
-echo "OCFSUBPATH=\`jq --raw-output '.implementation_paths[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen3.sh
-echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> gen3.sh
-echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen3.sh
-echo "" >> gen3.sh
-echo "# extract device description and create input file from config file" >> gen3.sh
-echo "jq --raw-output '.device_description' \${CURPWD}/\${PROJNAME}-config.json > \${CURPWD}/\${PROJNAME}.json" >> gen3.sh
-echo "" >> gen3.sh
-echo "# The lines above parse the config file and set everything up for the normal gen2.sh stuff below" >> gen3.sh
-echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen3.sh
-echo "eval \${MY_COMMAND}" >> gen3.sh
-echo "pwd" >> gen3.sh
-echo "" >> gen3.sh
-echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> gen3.sh
-echo "  if [ ! -e ./\${PROJNAME}/SConscript ]; then" >> gen3.sh
-echo "    MY_COMMAND=\"cp \${OCFPATH}/default.SConscript ./\${PROJNAME}/SConscript\"" >> gen3.sh
-echo "    eval \${MY_COMMAND}" >> gen3.sh
-echo "  fi" >> gen3.sh
-echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen3.sh
-echo "  eval \${MY_COMMAND}" >> gen3.sh
-echo "" >> gen3.sh
-echo "  # copying the introspection file to the executable folder" >> gen3.sh
-echo "  cp -f \${CURPWD}/device_output/code/server_introspection.dat \${CURPWD}/bin/" >> gen3.sh
-echo "" >> gen3.sh
-echo "  # quick fix: using the iotivity supplied oic_svr_db_server_justworks.dat file" >> gen3.sh
-echo "  MY_COMMAND=\"cp -f \${OCFPATH}/iotivity/resource/csdk/security/provisioning/sample/oic_svr_db_server_justworks.dat \${CURPWD}/bin/server_security.dat\"" >> gen3.sh
-echo "  eval \${MY_COMMAND}" >> gen3.sh
-echo "" >> gen3.sh
-echo "  if [ -e \${CURPWD}/src/\${PROJNAME}.cpp ];" >> gen3.sh
-echo "  then" >> gen3.sh
-echo "    echo \"It appears that you have modified the automatically generated source file. Use a tool like diff3 if you want to merge in any changes.\"" >> gen3.sh
-echo "  else" >> gen3.sh
-echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJNAME}.cpp" >> gen3.sh
-echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJNAME}-gen.cpp" >> gen3.sh
-echo "  fi" >> gen3.sh
-echo "elif [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen3.sh
-echo "  if [ ! -e ./\${PROJNAME}/Makefile ]; then" >> gen3.sh
-echo "    MY_COMMAND=\"cp \${OCFPATH}/default.Makefile ./\${PROJNAME}/Makefile\"" >> gen3.sh
-echo "    eval \${MY_COMMAND}" >> gen3.sh
-echo "  fi" >> gen3.sh
-echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen3.sh
-echo "  eval \${MY_COMMAND}" >> gen3.sh
-echo "" >> gen3.sh
-echo "  # copying the introspection file to the include folder" >> gen3.sh
-echo "  MY_COMMAND=\"cp -f \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-constrained/include/\"" >> gen3.sh
-echo "  eval \${MY_COMMAND}" >> gen3.sh
-echo "" >> gen3.sh
-echo "  mkdir \${CURPWD}/bin/\${PROJNAME}_creds" >> gen3.sh
-echo "" >> gen3.sh
-echo "  # modify the Makefile to make this project" >> gen3.sh
-echo "  MY_COMMAND=\"sed -i.bak -e \\\"s,\${OLD_PROJECT_NAME},\${PROJNAME},g\\\" \${CURPWD}/Makefile\"" >> gen3.sh
-echo "  eval \${MY_COMMAND}" >> gen3.sh
-echo "" >> gen3.sh
-echo "  if [ -e \${CURPWD}/src/\${PROJNAME}.c ];" >> gen3.sh
-echo "  then" >> gen3.sh
-echo "    echo \"It appears that you have modified the automatically generated source file. Use a tool like diff3 if you want to merge in any changes.\"" >> gen3.sh
-echo "  else" >> gen3.sh
-echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}.c" >> gen3.sh
-echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen3.sh
-echo "  fi" >> gen3.sh
-echo "else" >> gen3.sh
-echo "  echo \"No OCFSUBPATH: \$OCFSUBPATH\"" >> gen3.sh
-echo "fi" >> gen3.sh
+cd ${CURPWD}/Project-Scripts/
+echo "#!/bin/bash" > gen.sh
+echo "CURPWD=\`pwd\`" >> gen.sh
+echo "PROJNAME=\${PWD##*/}" >> gen.sh
+echo "OLD_PROJECT_NAME=device_builder_server" >> gen.sh
+echo "OCFBASEPATH=\`jq --raw-output '.ocf_base_path' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen.sh
+echo "DEVICETYPE=\`jq --raw-output '.device_type' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen.sh
+echo "DEVICENAME=\`jq --raw-output '.friendly_name' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen.sh
+echo "" >> gen.sh
+echo "#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> gen.sh
+echo "OCFSUBPATH=\`jq --raw-output '.implementation_paths[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen.sh
+echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> gen.sh
+echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> gen.sh
+echo "" >> gen.sh
+echo "# extract device description and create input file from config file" >> gen.sh
+echo "jq --raw-output '.device_description' \${CURPWD}/\${PROJNAME}-config.json > \${CURPWD}/\${PROJNAME}.json" >> gen.sh
+echo "" >> gen.sh
+echo "# The lines above parse the config file and set everything up for the normal gen2.sh stuff below" >> gen.sh
+echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen.sh
+echo "eval \${MY_COMMAND}" >> gen.sh
+echo "pwd" >> gen.sh
+echo "" >> gen.sh
+echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> gen.sh
+echo "  if [ ! -e ./\${PROJNAME}/SConscript ]; then" >> gen.sh
+echo "    MY_COMMAND=\"cp \${OCFPATH}/default.SConscript ./\${PROJNAME}/SConscript\"" >> gen.sh
+echo "    eval \${MY_COMMAND}" >> gen.sh
+echo "  fi" >> gen.sh
+echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "" >> gen.sh
+echo "  # copying the introspection file to the executable folder" >> gen.sh
+echo "  cp -f \${CURPWD}/device_output/code/server_introspection.dat \${CURPWD}/bin/" >> gen.sh
+echo "" >> gen.sh
+echo "  # quick fix: using the iotivity supplied oic_svr_db_server_justworks.dat file" >> gen.sh
+echo "  MY_COMMAND=\"cp -f \${OCFPATH}/iotivity/resource/csdk/security/provisioning/sample/oic_svr_db_server_justworks.dat \${CURPWD}/bin/server_security.dat\"" >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "" >> gen.sh
+echo "  if [ -e \${CURPWD}/src/\${PROJNAME}.cpp ];" >> gen.sh
+echo "  then" >> gen.sh
+echo "    echo \"It appears that you have modified the automatically generated source file. Use a tool like diff3 if you want to merge in any changes.\"" >> gen.sh
+echo "  else" >> gen.sh
+echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJNAME}.cpp" >> gen.sh
+echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJNAME}-gen.cpp" >> gen.sh
+echo "  fi" >> gen.sh
+echo "elif [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen.sh
+echo "  if [ ! -e ./\${PROJNAME}/Makefile ]; then" >> gen.sh
+echo "    MY_COMMAND=\"cp \${OCFPATH}/default.Makefile ./\${PROJNAME}/Makefile\"" >> gen.sh
+echo "    eval \${MY_COMMAND}" >> gen.sh
+echo "  fi" >> gen.sh
+echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "" >> gen.sh
+echo "  # copying the introspection file to the include folder" >> gen.sh
+echo "  MY_COMMAND=\"cp -f \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-constrained/include/\"" >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "" >> gen.sh
+echo "  mkdir \${CURPWD}/bin/\${PROJNAME}_creds" >> gen.sh
+echo "" >> gen.sh
+echo "  # modify the Makefile to make this project" >> gen.sh
+echo "  MY_COMMAND=\"sed -i.bak -e \\\"s,\${OLD_PROJECT_NAME},\${PROJNAME},g\\\" \${CURPWD}/Makefile\"" >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "" >> gen.sh
+echo "  if [ -e \${CURPWD}/src/\${PROJNAME}.c ];" >> gen.sh
+echo "  then" >> gen.sh
+echo "    echo \"It appears that you have modified the automatically generated source file. Use a tool like diff3 if you want to merge in any changes.\"" >> gen.sh
+echo "  else" >> gen.sh
+echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}.c" >> gen.sh
+echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
+echo "  fi" >> gen.sh
+echo "else" >> gen.sh
+echo "  echo \"No OCFSUBPATH: \$OCFSUBPATH\"" >> gen.sh
+echo "fi" >> gen.sh
 
-
-if [ "$OCFSUBPATH" == "/iot" ]; then
-  cp ${OCFPATH}/default.SConscript ./${PROJNAME}/SConscript
-elif [  "$OCFSUBPATH" == "/iot-lite" ]; then
-  cp ${OCFPATH}/default.Makefile ./$PROJNAME/Makefile
-else
-  echo "No OCFSUBPATH: $OCFSUBPATH"
-fi
-
+echo "#!/bin/bash" > build.sh
+echo "CURPWD=\`pwd\`" >> build.sh
+echo "PROJNAME=\${PWD##*/}" >> build.sh
+echo "OCFBASEPATH=\`jq --raw-output '.ocf_base_path' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
+echo "DEVICETYPE=\`jq --raw-output '.device_type' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
+echo "DEVICENAME=\`jq --raw-output '.friendly_name' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
+echo "" >> build.sh
+echo "#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> build.sh
+echo "OCFSUBPATH=\`jq --raw-output '.implementation_paths[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
+echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> build.sh
+echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
+echo "" >> build.sh
+echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> build.sh
+echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "" >> build.sh
+echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCFPATH}/iotivity/examples/${code_path}/server.cpp\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "" >> build.sh
+echo "  # copying the SConscript file to the source folder" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/SConscript \${OCFPATH}/iotivity/examples/OCFDeviceBuilder/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "" >> build.sh
+echo "  scons examples/${code_path}" >> build.sh
+echo "" >> build.sh
+echo "  #TODO remove this command once the above problem is fixed" >> build.sh
+echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/${code_path}/server /\${CURPWD}/bin/\${PROJNAME}\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "" >> build.sh
+echo "elif [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build.sh
+echo "  # copying the Makefile to the source folder" >> build.sh
+echo "  MY_COMMAND=\"cp \${OCFPATH}/default.Makefile ./\${PROJNAME}/Makefile\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "" >> build.sh
+echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-constrained/apps/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "" >> build.sh
+echo "  # Copying the Makefile file to the executable folder" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-constrained/port/linux/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-constrained/port/linux/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  #comment out one of the next lines to build another port" >> build.sh
+for d in ${OCFPATH}/iotivity-constrained/port/*/ ; do
+    echo "#cd $d" >> build.sh
+done
+echo "" >> build.sh
+echo "  #make with switches" >> build.sh
+echo "  make DYNAMIC=1 IPV4=1 \${PROJNAME}" >> build.sh
+echo "  #make DYNAMIC=1 \${PROJNAME}" >> build.sh
+echo "  #uncomment to make the debug version" >> build.sh
+echo "  #make DYNAMIC=1 DEBUG=1 \${PROJNAME}" >> build.sh
+echo "" >> build.sh
+echo "  #TODO remove this command once the above problem is fixed" >> build.sh
+echo "  MY_COMMAND=\"rm -rf \${OCFPATH}/iotivity-constrained/port/linux/\${PROJNAME}_creds\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"rm \${OCFPATH}/iotivity-constrained/apps/\${PROJNAME}.c\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"mv ./\${PROJNAME} /\${CURPWD}/bin/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "else" >> build.sh
+echo "  No OCFSUBPATH: \$OCFSUBPATH" >> build.sh
+echo "fi" >> build.sh
+echo "" >> build.sh
+echo "cd \$CURPWD" >> build.sh
 
 # create the build2 script with the correct OS stuff for IoTivity
 cd ${CURPWD}/Project-Scripts/IoTivity
@@ -132,7 +194,7 @@ echo "CURPWD=\`pwd\`" >> build2.sh
 echo "PROJNAME=\${PWD##*/}" >> build2.sh
 echo "" >> build2.sh
 echo "MY_COMMAND=\"cd \${OCFPATH}/iotivity/\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> gen3.sh
+echo "eval \${MY_COMMAND}" >> build2.sh
 echo "" >> build2.sh
 echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build2.sh
 echo "MY_COMMAND=\"cp \${CURPWD}/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build2.sh
@@ -153,84 +215,6 @@ echo "MY_COMMAND=\"cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/${
 echo "eval \${MY_COMMAND}" >> build2.sh
 echo "" >> build2.sh
 echo "cd \$CURPWD" >> build2.sh
-
-echo "#!/bin/bash" > build3.sh
-echo "CURPWD=\`pwd\`" >> build3.sh
-echo "PROJNAME=\${PWD##*/}" >> build3.sh
-echo "OCFBASEPATH=\`jq --raw-output '.ocf_base_path' \${CURPWD}/\${PROJNAME}-config.json\`" >> build3.sh
-echo "DEVICETYPE=\`jq --raw-output '.device_type' \${CURPWD}/\${PROJNAME}-config.json\`" >> build3.sh
-echo "DEVICENAME=\`jq --raw-output '.friendly_name' \${CURPWD}/\${PROJNAME}-config.json\`" >> build3.sh
-echo "" >> build3.sh
-echo "#TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)" >> build3.sh
-echo "OCFSUBPATH=\`jq --raw-output '.implementation_paths[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> build3.sh
-echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> build3.sh
-echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> build3.sh
-echo "" >> build3.sh
-echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> build3.sh
-echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity/\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "" >> build3.sh
-echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build3.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "  MY_COMMAND=\"mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCFPATH}/iotivity/examples/${code_path}/server.cpp\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "" >> build3.sh
-echo "  # copying the SConscript file to the source folder" >> build3.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/SConscript \${OCFPATH}/iotivity/examples/OCFDeviceBuilder/\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "" >> build3.sh
-echo "  scons examples/${code_path}" >> build3.sh
-echo "" >> build3.sh
-echo "  #TODO remove this command once the above problem is fixed" >> build3.sh
-echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/${code_path}/server /\${CURPWD}/bin/\${PROJNAME}\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "" >> build3.sh
-echo "elif [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build3.sh
-echo "  # copying the Makefile to the source folder" >> build3.sh
-echo "  MY_COMMAND=\"cp \${OCFPATH}/default.Makefile ./\${PROJNAME}/Makefile\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "" >> build3.sh
-echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build3.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-constrained/apps/\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "" >> build3.sh
-echo "  # Copying the Makefile file to the executable folder" >> build3.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-constrained/port/linux/\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-constrained/port/linux/\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "  #comment out one of the next lines to build another port" >> build3.sh
-for d in ${OCFPATH}/iotivity-constrained/port/*/ ; do
-    echo "#cd $d" >> build3.sh
-done
-echo "" >> build3.sh
-echo "  #make with switches" >> build3.sh
-echo "  make DYNAMIC=1 IPV4=1 \${PROJNAME}" >> build3.sh
-echo "  #make DYNAMIC=1 \${PROJNAME}" >> build3.sh
-echo "  #uncomment to make the debug version" >> build3.sh
-echo "  #make DYNAMIC=1 DEBUG=1 \${PROJNAME}" >> build3.sh
-echo "" >> build3.sh
-echo "  #TODO remove this command once the above problem is fixed" >> build3.sh
-echo "  MY_COMMAND=\"rm -rf \${OCFPATH}/iotivity-constrained/port/linux/\${PROJNAME}_creds\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "  MY_COMMAND=\"rm \${OCFPATH}/iotivity-constrained/apps/\${PROJNAME}.c\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "  MY_COMMAND=\"mv ./\${PROJNAME} /\${CURPWD}/bin/\"" >> build3.sh
-echo "  eval \${MY_COMMAND}" >> build3.sh
-echo "else" >> build3.sh
-echo "  No OCFSUBPATH: \$OCFSUBPATH" >> build3.sh
-echo "fi" >> build3.sh
-echo "" >> build3.sh
-echo "cd \$CURPWD" >> build3.sh
-
-chmod +x ${CURPWD}/Project-Scripts/IoTivity/*.sh
-# copy to IoTivity-lite
-cp ${CURPWD}/Project-Scripts/IoTivity/build3.sh ${CURPWD}/Project-Scripts/IoTivity-lite/
-
-cp ${CURPWD}/Project-Scripts/IoTivity/* ${OCFPATH}/../iot/
 
 # create the build2 script with the correct OS stuff for IoTivity-lite
 cd ${CURPWD}/Project-Scripts/IoTivity-lite
@@ -267,10 +251,9 @@ echo "mv ./\${PROJNAME} /\${CURPWD}/bin/" >> build2.sh
 echo "" >> build2.sh
 echo "cd \${CURPWD}" >> build2.sh
 
+# make scripts executable
+chmod +x ${CURPWD}/Project-Scripts/*.sh
+chmod +x ${CURPWD}/Project-Scripts/IoTivity/*.sh
 chmod +x ${CURPWD}/Project-Scripts/IoTivity-lite/*.sh
-# copy to IoTivity-lite
-cp ${CURPWD}/Project-Scripts/IoTivity/*3.sh ${CURPWD}/Project-Scripts/IoTivity-lite/
-
-cp ${CURPWD}/Project-Scripts/IoTivity-lite/* ${OCFPATH}/../iot-lite/
 
 cd ${CURPWD}
