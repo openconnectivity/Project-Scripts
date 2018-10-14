@@ -65,7 +65,7 @@ echo "pwd" >> gen.sh
 echo "" >> gen.sh
 echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> gen.sh
 echo "  if [ ! -e \${CURPWD}/SConscript ]; then" >> gen.sh
-echo "    MY_COMMAND=\"cp \${OCFPATH}/default.SConscript \${CURPWD}/SConscript\"" >> gen.sh
+echo "    MY_COMMAND=\"cp \${OCFPATH}/../Project-Scripts/IoTivity/default.SConscript \${CURPWD}/SConscript\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
 echo "  fi" >> gen.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen.sh
@@ -87,7 +87,7 @@ echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJN
 echo "  fi" >> gen.sh
 echo "elif [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen.sh
 echo "  if [ ! -e \${CURPWD}/Makefile ]; then" >> gen.sh
-echo "    MY_COMMAND=\"cp \${OCFPATH}/default.Makefile \${CURPWD}/Makefile\"" >> gen.sh
+echo "    MY_COMMAND=\"cp \${OCFPATH}/../Project-Scripts/IoTivity-lite/default.Makefile \${CURPWD}/Makefile\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
 echo "  fi" >> gen.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen.sh
@@ -251,11 +251,5 @@ echo "cd \${CURPWD}" >> build2.sh
 chmod +x ${CURPWD}/Project-Scripts/*.sh
 chmod +x ${CURPWD}/Project-Scripts/IoTivity/*.sh
 chmod +x ${CURPWD}/Project-Scripts/IoTivity-lite/*.sh
-
-# copy default files
-MY_COMMAND="cp ${CURPWD}/Project-Scripts/IoTivity/default.SConscript ${OCFPATH}/"
-eval ${MY_COMMAND}
-MY_COMMAND="cp ${CURPWD}/Project-Scripts/IoTivity-lite/default.Makefile ${OCFPATH}/"
-eval ${MY_COMMAND}
 
 cd ${CURPWD}
