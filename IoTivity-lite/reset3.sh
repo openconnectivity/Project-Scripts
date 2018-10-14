@@ -1,4 +1,5 @@
 #!/bin/bash
+PROJNAME=${PWD##*/}
 OCFBASEPATH=`jq --raw-output '.ocf_base_path' ${CURPWD}/${PROJNAME}-config.json`
 
 # TODO Go through DeviceBuilder for each of the implementations and platforms (just doing the first array element for this example)
