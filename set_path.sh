@@ -19,7 +19,7 @@
 #############################
 
 CURPWD=`pwd`
-SCRIPTPATH=${CURPWD}/Project-Scripts
+SCRIPTPATH=~/Project-Scripts
 
 if [[ ! (${PATH} == *${SCRIPTPATH}*) ]]; then
   # update the PATH environment variable: NEED TO RUN THIS SCRIPT WITH "source set_path.sh"
