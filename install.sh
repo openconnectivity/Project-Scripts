@@ -253,7 +253,9 @@ chmod +x ${CURPWD}/Project-Scripts/IoTivity/*.sh
 chmod +x ${CURPWD}/Project-Scripts/IoTivity-lite/*.sh
 
 # copy default files
-cp ${CURPWD}/Project-Scripts/IoTivity/default.SConscript ${OCFPATH}/
-cp ${CURPWD}/Project-Scripts/IoTivity-lite/default.Makefile ${OCFPATH}/
+MY_COMMAND="cp ${CURPWD}/Project-Scripts/IoTivity/default.SConscript ${OCFPATH}/"
+eval ${MY_COMMAND}
+MY_COMMAND="cp ${CURPWD}/Project-Scripts/IoTivity-lite/default.Makefile ${OCFPATH}/"
+eval ${MY_COMMAND}
 
 cd ${CURPWD}
