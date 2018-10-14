@@ -64,8 +64,8 @@ echo "eval \${MY_COMMAND}" >> gen.sh
 echo "pwd" >> gen.sh
 echo "" >> gen.sh
 echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> gen.sh
-echo "  if [ ! -e ./SConscript ]; then" >> gen.sh
-echo "    MY_COMMAND=\"cp \${OCFPATH}/default.SConscript ./SConscript\"" >> gen.sh
+echo "  if [ ! -e \${CURPWD}/SConscript ]; then" >> gen.sh
+echo "    MY_COMMAND=\"cp \${OCFPATH}/default.SConscript \${CURPWD}/SConscript\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
 echo "  fi" >> gen.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen.sh
@@ -86,8 +86,8 @@ echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJN
 echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJNAME}-gen.cpp" >> gen.sh
 echo "  fi" >> gen.sh
 echo "elif [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen.sh
-echo "  if [ ! -e ./Makefile ]; then" >> gen.sh
-echo "    MY_COMMAND=\"cp \${OCFPATH}/default.Makefile ./Makefile\"" >> gen.sh
+echo "  if [ ! -e \${CURPWD}/Makefile ]; then" >> gen.sh
+echo "    MY_COMMAND=\"cp \${OCFPATH}/default.Makefile \${CURPWD}/Makefile\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
 echo "  fi" >> gen.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen.sh
@@ -150,10 +150,6 @@ echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "elif [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build.sh
-echo "  # copying the Makefile to the source folder" >> build.sh
-echo "  MY_COMMAND=\"cp \${OCFPATH}/default.Makefile ./\${PROJNAME}/Makefile\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-constrained/apps/\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
@@ -165,7 +161,7 @@ echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-constrained/port/linux/\"" >> build
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  #comment out one of the next lines to build another port" >> build.sh
 for d in ${OCFPATH}/iotivity-constrained/port/*/ ; do
-    echo "#cd $d" >> build.sh
+    echo "  #cd $d" >> build.sh
 done
 echo "" >> build.sh
 echo "  #make with switches" >> build.sh
