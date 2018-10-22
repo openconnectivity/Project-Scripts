@@ -57,20 +57,3 @@ If the Project-Scripts is not in the PATH, you can do the following:
     1. Discover, onboard and control the server using OTGC.
     2. Discover, onboard and control the server using DeviceSpy.
     3. Test the server using CTT.
-
-# Basic Development cycle:
-This is the original IoTivity development process that only works within the IoTivity or IoTivity-lite directory.
-
-1. Change to the development directory where the scripts are found:
-    1. cd ~/iot (for IoTivity) or cd ~/iot-lite (for IoTivity-lite)
-2. Run the following development cycle scripts as needed
-    1. ./gen.sh - generate the code, introspection file, onboarding file, etc.
-        1. (optional) To load new a new example: ./gen.sh automation-phat (or whatever example you want) This will copy the correct device description code and generate the .cpp code, introspection file, etc. The currently available examples are: automation-phat, automation-hat, enviro-phat, mraa-example, and example (original simple single switch with no board interface code).
-    2. ./build.sh - compile and link everything
-    3. ./edit_code.sh - edit the server source code. NOTE: This edits whatever server.cpp code is currently active. It does NOT edit the code in the example directories.
-    4. ./reset.sh - reset the sever to RFOTM by copying a fresh onboarding file
-    5. ./run.sh - run the currently compiled server in the appropriate directory
-3. When doing the client control described below, you should see nice debug messages in the server terminal confirming that the messages are getting through.
-    1. Discover, onboard and control the server using OTGC
-    2. Discover, onboard and control the server using DeviceSpy
-    3. Test the server using CTT
