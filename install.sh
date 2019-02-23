@@ -94,7 +94,7 @@ echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJ
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
 echo "  # copying the introspection file to the include folder" >> gen.sh
-echo "  MY_COMMAND=\"cp -f \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-constrained/include/\"" >> gen.sh
+echo "  MY_COMMAND=\"cp -f \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-lite/include/\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
 echo "  mkdir \${CURPWD}/bin/\${PROJNAME}_creds" >> gen.sh
@@ -151,16 +151,16 @@ echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "elif [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-constrained/apps/\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "  # Copying the Makefile file to the executable folder" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-constrained/port/linux/\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-lite/port/linux/\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-constrained/port/linux/\"" >> build.sh
+echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/linux/\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  #comment out one of the next lines to build another port" >> build.sh
-for d in ${OCFPATH}/iotivity-constrained/port/*/ ; do
+for d in ${OCFPATH}/iotivity-lite/port/*/ ; do
     echo "  #cd $d" >> build.sh
 done
 echo "" >> build.sh
@@ -171,9 +171,9 @@ echo "  #uncomment to make the debug version" >> build.sh
 echo "  #make DYNAMIC=1 DEBUG=1 \${PROJNAME}" >> build.sh
 echo "" >> build.sh
 echo "  #TODO remove this command once the above problem is fixed" >> build.sh
-echo "  MY_COMMAND=\"rm -rf \${OCFPATH}/iotivity-constrained/port/linux/\${PROJNAME}_creds\"" >> build.sh
+echo "  MY_COMMAND=\"rm -rf \${OCFPATH}/iotivity-lite/port/linux/\${PROJNAME}_creds\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"rm \${OCFPATH}/iotivity-constrained/apps/\${PROJNAME}.c\"" >> build.sh
+echo "  MY_COMMAND=\"rm \${OCFPATH}/iotivity-lite/apps/\${PROJNAME}.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"mv ./\${PROJNAME} /\${CURPWD}/bin/\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
@@ -219,16 +219,16 @@ echo "CURPWD=\`pwd\`" >> build2.sh
 echo "PROJNAME=\${PWD##*/}" >> build2.sh
 echo "" >> build2.sh
 echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build2.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-constrained/apps/\"" >> build2.sh
+echo "MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/\"" >> build2.sh
 echo "eval \${MY_COMMAND}" >> build2.sh
 echo "" >> build2.sh
 echo "# Copying the Makefile file to the executable folder" >> build2.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-constrained/port/linux/\"" >> build2.sh
+echo "MY_COMMAND=\"cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-lite/port/linux/\"" >> build2.sh
 echo "eval \${MY_COMMAND}" >> build2.sh
-echo "MY_COMMAND=\"cd \${OCFPATH}/iotivity-constrained/port/linux/\"" >> build2.sh
+echo "MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/linux/\"" >> build2.sh
 echo "eval \${MY_COMMAND}" >> build2.sh
 echo "#comment out one of the next lines to build another port" >> build2.sh
-for d in ${OCFPATH}/iotivity-constrained/port/*/ ; do
+for d in ${OCFPATH}/iotivity-lite/port/*/ ; do
     echo "#cd $d" >> build2.sh
 done
 echo "" >> build2.sh
@@ -239,9 +239,9 @@ echo "#uncomment to make the debug version" >> build2.sh
 echo "#make DYNAMIC=1 DEBUG=1 \${PROJNAME}" >> build2.sh
 echo "" >> build2.sh
 echo "#TODO remove this command once the above problem is fixed" >> build2.sh
-echo "MY_COMMAND=\"rm -rf \${OCFPATH}/iotivity-constrained/port/linux/\${PROJNAME}_creds\"" >> build2.sh
+echo "MY_COMMAND=\"rm -rf \${OCFPATH}/iotivity-lite/port/linux/\${PROJNAME}_creds\"" >> build2.sh
 echo "eval \${MY_COMMAND}" >> build2.sh
-echo "MY_COMMAND=\"rm \${OCFPATH}/iotivity-constrained/apps/\${PROJNAME}.c\"" >> build2.sh
+echo "MY_COMMAND=\"rm \${OCFPATH}/iotivity-lite/apps/\${PROJNAME}.c\"" >> build2.sh
 echo "eval \${MY_COMMAND}" >> build2.sh
 echo "mv ./\${PROJNAME} /\${CURPWD}/bin/" >> build2.sh
 echo "" >> build2.sh
