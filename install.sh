@@ -68,7 +68,7 @@ echo "  if [ ! -e \${CURPWD}/SConscript ]; then" >> gen.sh
 echo "    MY_COMMAND=\"cp \${OCFPATH}/../Project-Scripts/IoTivity/default.SConscript \${CURPWD}/SConscript\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
 echo "  fi" >> gen.sh
-echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\ \\\"\${DEVICENAME}\\\"\"" >> gen.sh
+echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\" \\\"\${DEVICENAME}\\\"\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
 echo "  # copying the introspection file to the executable folder" >> gen.sh
