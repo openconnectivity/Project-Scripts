@@ -68,7 +68,7 @@ echo "  if [ ! -e \${CURPWD}/SConscript ]; then" >> gen.sh
 echo "    MY_COMMAND=\"cp \${OCFPATH}/../Project-Scripts/IoTivity/default.SConscript \${CURPWD}/SConscript\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
 echo "  fi" >> gen.sh
-echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen.sh
+echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\ \\\"\${DEVICENAME}\\\"\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
 echo "  # copying the introspection file to the executable folder" >> gen.sh
@@ -90,7 +90,7 @@ echo "  if [ ! -e \${CURPWD}/Makefile ]; then" >> gen.sh
 echo "    MY_COMMAND=\"cp \${OCFPATH}/../Project-Scripts/IoTivity-lite/default.Makefile \${CURPWD}/Makefile\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
 echo "  fi" >> gen.sh
-echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\"\"" >> gen.sh
+echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\" \\\"\${DEVICENAME}\\\"\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
 echo "  # copying the introspection file to the include folder" >> gen.sh
