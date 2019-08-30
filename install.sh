@@ -42,7 +42,7 @@ sudo apt-get install jq
 
 # create the gen script for the config file
 cd ${CURPWD}/Project-Scripts/
-echo "#!/bin/bash" > gen.sh
+echo "#!/bin/bash -v" > gen.sh
 echo "CURPWD=\`pwd\`" >> gen.sh
 echo "PROJNAME=\${PWD##*/}" >> gen.sh
 echo "OLD_PROJECT_NAME=device_builder_server" >> gen.sh
@@ -109,7 +109,7 @@ echo "  echo \"No OCFSUBPATH: \$OCFSUBPATH\"" >> gen.sh
 echo "fi" >> gen.sh
 
 # create the build script for the config file
-echo "#!/bin/bash" > build.sh
+echo "#!/bin/bash -v" > build.sh
 echo "CURPWD=\`pwd\`" >> build.sh
 echo "PROJNAME=\${PWD##*/}" >> build.sh
 echo "OCFBASEPATH=\`jq --raw-output '.ocf_base_path' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
