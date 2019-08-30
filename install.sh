@@ -150,10 +150,10 @@ echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  make -f \${CURPWD}\devbuildmake DYNAMIC=1 IPV4=1 device_builder_server" >> build.sh
-echo "  #make -f \${CURPWD}\devbuildmake DYNAMIC=1 device_builder_server" >> build.sh
+echo "  make -f \${CURPWD}/devbuildmake DYNAMIC=1 IPV4=1 device_builder_server" >> build.sh
+echo "  #make -f \${CURPWD}/devbuildmake DYNAMIC=1 device_builder_server" >> build.sh
 echo "  #uncomment to make the debug version" >> build.sh
-echo "  #make -f \${CURPWD}\devbuildmake DYNAMIC=1 DEBUG=1 device_builder_server" >> build.sh
+echo "  #make -f \${CURPWD}/devbuildmake DYNAMIC=1 DEBUG=1 device_builder_server" >> build.sh
 echo "" >> build.sh
 echo "  #TODO remove this command once the above problem is fixed" >> build.sh
 echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/device_builder_server \${CURPWD}/BIN/\${PROJNAME}\"" >> build.sh
