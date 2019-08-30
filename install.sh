@@ -159,8 +159,6 @@ echo "" >> build.sh
 echo "  #TODO remove this command once the above problem is fixed" >> build.sh
 echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/device_builder_server \${CURPWD}/bin/\${PROJNAME}\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"rm \${OCFPATH}/iotivity-lite/apps/\${PROJNAME}.c\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
 echo "else" >> build.sh
 echo "  No OCFSUBPATH: \$OCFSUBPATH" >> build.sh
 echo "fi" >> build.sh
