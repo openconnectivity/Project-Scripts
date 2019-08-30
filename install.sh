@@ -86,8 +86,8 @@ echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJN
 echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJNAME}-gen.cpp" >> gen.sh
 echo "  fi" >> gen.sh
 echo "elif [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen.sh
-echo "  if [ ! -e \${CURPWD}/Makefile ]; then" >> gen.sh
-echo "    MY_COMMAND=\"cp \${OCFPATH}/../Project-Scripts/IoTivity-lite/default.Makefile \${CURPWD}/Makefile\"" >> gen.sh
+echo "  if [ ! -e \${CURPWD}/devbuildmake ]; then" >> gen.sh
+echo "    MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/devbuildmake \${CURPWD}/\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
 echo "  fi" >> gen.sh
 echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\" \\\"\${DEVICENAME}\\\"\"" >> gen.sh
@@ -95,12 +95,6 @@ echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
 echo "  # copying the introspection file to the include folder" >> gen.sh
 echo "  MY_COMMAND=\"cp -f \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-lite/include/\"" >> gen.sh
-echo "  eval \${MY_COMMAND}" >> gen.sh
-echo "" >> gen.sh
-echo "  mkdir \${CURPWD}/bin/\${PROJNAME}_creds" >> gen.sh
-echo "" >> gen.sh
-echo "  # modify the Makefile to make this project" >> gen.sh
-echo "  MY_COMMAND=\"sed -i.bak -e \\\"s,\${OLD_PROJECT_NAME},\${PROJNAME},g\\\" \${CURPWD}/Makefile\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
 echo "  if [ -e \${CURPWD}/src/\${PROJNAME}.c ];" >> gen.sh
@@ -151,31 +145,20 @@ echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "elif [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
-echo "  # Copying the Makefile file to the executable folder" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-lite/port/linux/\"" >> build.sh
+echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/linux/\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  #comment out one of the next lines to build another port" >> build.sh
-for d in ${OCFPATH}/iotivity-lite/port/*/ ; do
-    echo "  #cd $d" >> build.sh
-done
-echo "" >> build.sh
-echo "  #make with switches" >> build.sh
-echo "  make DYNAMIC=1 IPV4=1 \${PROJNAME}" >> build.sh
-echo "  #make DYNAMIC=1 \${PROJNAME}" >> build.sh
+echo "  make -f \${CURPWD}\devbuildmake DYNAMIC=1 IPV4=1 device_builder_server" >> build.sh
+echo "  #make -f \${CURPWD}\devbuildmake DYNAMIC=1 device_builder_server" >> build.sh
 echo "  #uncomment to make the debug version" >> build.sh
-echo "  #make DYNAMIC=1 DEBUG=1 \${PROJNAME}" >> build.sh
+echo "  #make -f \${CURPWD}\devbuildmake DYNAMIC=1 DEBUG=1 device_builder_server" >> build.sh
 echo "" >> build.sh
 echo "  #TODO remove this command once the above problem is fixed" >> build.sh
-echo "  MY_COMMAND=\"rm -rf \${OCFPATH}/iotivity-lite/port/linux/\${PROJNAME}_creds\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/device_builder_server \${CURPWD}/BIN/\${PROJNAME}\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"rm \${OCFPATH}/iotivity-lite/apps/\${PROJNAME}.c\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"mv ./\${PROJNAME} /\${CURPWD}/bin/\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "else" >> build.sh
 echo "  No OCFSUBPATH: \$OCFSUBPATH" >> build.sh
