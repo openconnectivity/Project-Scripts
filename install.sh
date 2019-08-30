@@ -145,7 +145,7 @@ echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "elif [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
