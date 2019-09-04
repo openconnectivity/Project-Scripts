@@ -99,10 +99,14 @@ echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
 echo "  if [ -e \${CURPWD}/src/\${PROJNAME}.c ];" >> gen.sh
 echo "  then" >> gen.sh
-echo "    echo \"It appears that you have modified the automatically generated source file. Use a tool like diff3 if you want to merge in any changes.\"" >> gen.sh
+echo "    cp -f \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
+echo "    diff3 -m \${CURPWD}/src/\${PROJNAME}-gen.c \${CURPWD}/src/\${PROJNAME}-old.c \${CURPWD}/src/\${PROJNAME}.c > \${CURPWD}/src/\${PROJNAME}-new.c" >> gen.sh
+echo "    cp -f  \${CURPWD}/src/\${PROJNAME}-gen.c \${CURPWD}/src/\${PROJNAME}-old.c" >> gen.sh
+echo "    mv -f  \${CURPWD}/src/\${PROJNAME}-new.c \${CURPWD}/src/\${PROJNAME}.c" >> gen.sh
 echo "  else" >> gen.sh
 echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}.c" >> gen.sh
 echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
+echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-old.c" >> gen.sh
 echo "  fi" >> gen.sh
 echo "else" >> gen.sh
 echo "  echo \"No OCFSUBPATH: \$OCFSUBPATH\"" >> gen.sh
