@@ -42,7 +42,9 @@ sudo apt-get install jq
 
 # create the gen script for the config file
 cd ${CURPWD}/Project-Scripts/
-echo "#!/bin/bash -x" > gen.sh
+# for debugging
+# echo "#!/bin/bash -x" > gen.sh
+echo "#!/bin/bash" > gen.sh
 echo "CURPWD=\`pwd\`" >> gen.sh
 echo "PROJNAME=\${PWD##*/}" >> gen.sh
 echo "OLD_PROJECT_NAME=device_builder_server" >> gen.sh
@@ -119,7 +121,7 @@ echo "  echo \"No OCFSUBPATH: \$OCFSUBPATH\"" >> gen.sh
 echo "fi" >> gen.sh
 
 # create the build script for the config file
-echo "#!/bin/bash -x" > build.sh
+echo "#!/bin/bash" > build.sh
 echo "CURPWD=\`pwd\`" >> build.sh
 echo "PROJNAME=\${PWD##*/}" >> build.sh
 echo "OCFBASEPATH=\`jq --raw-output '.ocf_base_path' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
@@ -174,70 +176,6 @@ echo "  No OCFSUBPATH: \$OCFSUBPATH" >> build.sh
 echo "fi" >> build.sh
 echo "" >> build.sh
 echo "cd \$CURPWD" >> build.sh
-
-# create the build2 script with the correct OS stuff for IoTivity
-cd ${CURPWD}/Project-Scripts/IoTivity
-echo "#!/bin/bash" > build2.sh
-echo "CURPWD=\`pwd\`" >> build2.sh
-echo "PROJNAME=\${PWD##*/}" >> build2.sh
-echo "" >> build2.sh
-echo "MY_COMMAND=\"cd \${OCFPATH}/iotivity/\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "" >> build2.sh
-echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build2.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "MY_COMMAND=\"mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCFPATH}/iotivity/examples/${code_path}/server.cpp" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "" >> build2.sh
-echo "# copying the SConscript file to the source folder" >> build2.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/SConscript \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "" >> build2.sh
-echo "scons examples/${code_path}" >> build2.sh
-echo "" >> build2.sh
-echo "#TODO remove this command once the above problem is fixed" >> build2.sh
-echo "MY_COMMAND=\"cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/${code_path}/server /\${CURPWD}/bin/\${PROJNAME}\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "" >> build2.sh
-echo "cd \$CURPWD" >> build2.sh
-
-# create the build2 script with the correct OS stuff for IoTivity-lite
-cd ${CURPWD}/Project-Scripts/IoTivity-lite
-echo "#!/bin/bash" > build2.sh
-echo "CURPWD=\`pwd\`" >> build2.sh
-echo "PROJNAME=\${PWD##*/}" >> build2.sh
-echo "" >> build2.sh
-echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build2.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "" >> build2.sh
-echo "# Copying the Makefile file to the executable folder" >> build2.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/Makefile \${OCFPATH}/iotivity-lite/port/linux/\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/linux/\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "#comment out one of the next lines to build another port" >> build2.sh
-for d in ${OCFPATH}/iotivity-lite/port/*/ ; do
-    echo "#cd $d" >> build2.sh
-done
-echo "" >> build2.sh
-echo "#make with switches" >> build2.sh
-echo "make DYNAMIC=1 IPV4=1 \${PROJNAME}" >> build2.sh
-echo "#make DYNAMIC=1 \${PROJNAME}" >> build2.sh
-echo "#uncomment to make the debug version" >> build2.sh
-echo "#make DYNAMIC=1 DEBUG=1 \${PROJNAME}" >> build2.sh
-echo "" >> build2.sh
-echo "#TODO remove this command once the above problem is fixed" >> build2.sh
-echo "MY_COMMAND=\"rm -rf \${OCFPATH}/iotivity-lite/port/linux/\${PROJNAME}_creds\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "MY_COMMAND=\"rm \${OCFPATH}/iotivity-lite/apps/\${PROJNAME}.c\"" >> build2.sh
-echo "eval \${MY_COMMAND}" >> build2.sh
-echo "mv ./\${PROJNAME} /\${CURPWD}/bin/" >> build2.sh
-echo "" >> build2.sh
-echo "cd \${CURPWD}" >> build2.sh
 
 # make scripts executable
 chmod +x ${CURPWD}/Project-Scripts/*.sh
