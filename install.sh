@@ -100,7 +100,7 @@ echo "" >> gen.sh
 echo "  if [ -e \${CURPWD}/src/\${PROJNAME}.c ];" >> gen.sh
 echo "  then" >> gen.sh
 echo "    cp -f \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
-echo "    if [ cmp -s src/\${PROJNAME}-gen.c src/\${PROJNAME}-old.c ] ;" >> gen.sh
+echo "    if [ cmp -s \${CURPWD}/src/\${PROJNAME}-gen.c \${CURPWD}/src/\${PROJNAME}-old.c ] ;" >> gen.sh
 echo "    then" >> gen.sh
 echo "      echo \"The source file built by DeviceBuilder changed. You can use diff3 to merge your own modifications.\"" >> gen.sh
 echo "      echo \"Example: diff3 -m src/\${PROJNAME}-gen.c src/\${PROJNAME}-old.c src/\${PROJNAME}.c > src/\${PROJNAME}-new.c\"" >> gen.sh
