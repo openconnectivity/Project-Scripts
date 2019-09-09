@@ -60,12 +60,18 @@ echo "" >> gen.sh
 echo "# extract device description and create input file from config file" >> gen.sh
 echo "jq --raw-output '.device_description' \${CURPWD}/\${PROJNAME}-config.json > \${CURPWD}/\${PROJNAME}.json" >> gen.sh
 echo "" >> gen.sh
-echo "# The lines above parse the config file and set everything up for the normal gen2.sh stuff below" >> gen.sh
+echo "# The lines above parse the config file and set everything up for the normal gen.sh stuff below" >> gen.sh
 echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen.sh
 echo "eval \${MY_COMMAND}" >> gen.sh
 echo "pwd" >> gen.sh
 echo "" >> gen.sh
+echo "" >> gen.sh
+echo "" >> gen.sh
+echo "" >> gen.sh
 echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> gen.sh
+echo "" >> gen.sh
+echo "" >> gen.sh
+echo "" >> gen.sh
 echo "  if [ ! -e \${CURPWD}/SConscript ]; then" >> gen.sh
 echo "    MY_COMMAND=\"cp \${OCFPATH}/../Project-Scripts/IoTivity/default.SConscript \${CURPWD}/SConscript\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
