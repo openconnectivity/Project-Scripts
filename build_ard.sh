@@ -12,12 +12,12 @@ PLATFORM=`jq --raw-output '.platforms[0]' ${CURPWD}/${PROJNAME}-config.json`
 
 if [  "$OCFSUBPATH" == "/iot-lite" ]; then
   #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over.
-  MY_COMMAND="cp ${CURPWD}/src/${PROJNAME}.c ${OCFBASEPATH}/iotivity-lite/apps/server_devicebuilder.c"
+  MY_COMMAND="cp ${CURPWD}/src/${PROJNAME}.c ${OCFPATH}/../iotivity-lite/apps/server_devicebuilder.c"
   eval ${MY_COMMAND}
-  MY_COMMAND="cp ${CURPWD}/src/${PROJNAME}-main.cpp ${OCFBASEPATH}/iotivity-lite/apps/server_arduino.cpp"
+  MY_COMMAND="cp ${CURPWD}/src/${PROJNAME}-main.cpp ${OCFPATH}/../iotivity-lite/apps/server_arduino.cpp"
   eval ${MY_COMMAND}
 
-  MY_COMMAND="cd ${OCFPATH}/iotivity-lite/port/${PLATFORM}/"
+  MY_COMMAND="cd ${OCFPATH}/../iotivity-lite/port/${PLATFORM}/"
   eval ${MY_COMMAND}
   MY_COMMAND="./build_arduino.sh --arch sam --secure --upload"
   eval ${MY_COMMAND}
