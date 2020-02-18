@@ -99,8 +99,9 @@ echo "  # copying the introspection file to the include folder" >> gen.sh
 echo "  MY_COMMAND=\"cp -f \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-lite/include/\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
-echo "  if [ ! -f ./pki_certs.zip ]; then" >> gen.sh
+echo "  if [ ! -f ../pki_certs.zip ]; then" >> gen.sh
 echo "    # only create when the file does not exist" >> gen.sh
+echo "    cd .." >> gen.sh
 echo "    MY_COMMAND=\"sh ./pki.sh\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
 echo "  fi" >> gen.sh
