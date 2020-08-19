@@ -65,29 +65,7 @@ echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen.sh
 echo "eval \${MY_COMMAND}" >> gen.sh
 echo "pwd" >> gen.sh
 echo "" >> gen.sh
-echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> gen.sh
-echo "  if [ ! -e \${CURPWD}/SConscript ]; then" >> gen.sh
-echo "    MY_COMMAND=\"cp \${OCFPATH}/../Project-Scripts/IoTivity/default.SConscript \${CURPWD}/SConscript\"" >> gen.sh
-echo "    eval \${MY_COMMAND}" >> gen.sh
-echo "  fi" >> gen.sh
-echo "  MY_COMMAND=\"sh ./DeviceBuilder_C++IotivityServer.sh \${CURPWD}/\${PROJNAME}.json  \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\" \\\"\${DEVICENAME}\\\"\"" >> gen.sh
-echo "  eval \${MY_COMMAND}" >> gen.sh
-echo "" >> gen.sh
-echo "  # copying the introspection file to the executable folder" >> gen.sh
-echo "  cp -f \${CURPWD}/device_output/code/server_introspection.dat \${CURPWD}/bin/" >> gen.sh
-echo "" >> gen.sh
-echo "  # quick fix: using the iotivity supplied oic_svr_db_server_justworks.dat file" >> gen.sh
-echo "  MY_COMMAND=\"cp -f \${OCFPATH}/iotivity/resource/csdk/security/provisioning/sample/oic_svr_db_server_justworks.dat \${CURPWD}/bin/server_security.dat\"" >> gen.sh
-echo "  eval \${MY_COMMAND}" >> gen.sh
-echo "" >> gen.sh
-echo "  if [ -e \${CURPWD}/src/\${PROJNAME}.cpp ];" >> gen.sh
-echo "  then" >> gen.sh
-echo "    echo \"It appears that you have modified the automatically generated source file. Use a tool like diff3 if you want to merge in any changes.\"" >> gen.sh
-echo "  else" >> gen.sh
-echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJNAME}.cpp" >> gen.sh
-echo "    cp -i \${CURPWD}/device_output/code/server.cpp \${CURPWD}/src/\${PROJNAME}-gen.cpp" >> gen.sh
-echo "  fi" >> gen.sh
-echo "elif [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen.sh
+echo "if [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen.sh
 echo "  if [ ! -e \${CURPWD}/devbuildmake ]; then" >> gen.sh
 echo "    MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/devbuildmake \${CURPWD}/\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
@@ -140,29 +118,7 @@ echo "OCFSUBPATH=\`jq --raw-output '.implementation_paths[0]' \${CURPWD}/\${PROJ
 echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> build.sh
 echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
 echo "" >> build.sh
-echo "if [ \"\$OCFSUBPATH\" == \"/iot\" ]; then" >> build.sh
-echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity/\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "" >> build.sh
-echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/*.cpp \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/*.h \${OCFPATH}/iotivity/examples/${code_path}/\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"mv -f \${OCFPATH}/iotivity/examples/${code_path}/\${PROJNAME}.cpp \${OCFPATH}/iotivity/examples/${code_path}/server.cpp\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "" >> build.sh
-echo "  # copying the SConscript file to the source folder" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/SConscript \${OCFPATH}/iotivity/examples/OCFDeviceBuilder/\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "" >> build.sh
-echo "  scons examples/${code_path}" >> build.sh
-echo "" >> build.sh
-echo "  #TODO remove this command once the above problem is fixed" >> build.sh
-echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity/out/linux/${ARCH}/release/examples/${code_path}/server /\${CURPWD}/bin/\${PROJNAME}\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "" >> build.sh
-echo "elif [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build.sh
+echo "if [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
