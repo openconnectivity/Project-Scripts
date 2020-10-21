@@ -114,7 +114,7 @@ echo "OCFSUBPATH=\`jq --raw-output '.implementation_paths[0]' \${CURPWD}/\${PROJ
 echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> build.sh
 echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
 echo "" >> build.sh
-echo "if [ \"\$PLATFORM\" == \"esp32\"];" >> build.sh
+echo "if [ \"\$PLATFORM\" == \"esp32\" ];" >> build.sh
 echo "then" >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/esp32-example.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
