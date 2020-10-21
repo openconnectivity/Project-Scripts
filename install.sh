@@ -65,7 +65,7 @@ echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen.sh
 echo "eval \${MY_COMMAND}" >> gen.sh
 echo "pwd" >> gen.sh
 echo "" >> gen.sh
-echo "if [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen.sh
+#echo "if [ \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> gen.sh
 echo "  if [ ! -e \${CURPWD}/devbuildmake ]; then" >> gen.sh
 echo "    MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/devbuildmake \${CURPWD}/\"" >> gen.sh
 echo "    eval \${MY_COMMAND}" >> gen.sh
@@ -101,9 +101,9 @@ echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJ
 echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
 echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-old.c" >> gen.sh
 echo "  fi" >> gen.sh
-echo "else" >> gen.sh
-echo "  echo \"No OCFSUBPATH: \$OCFSUBPATH\"" >> gen.sh
-echo "fi" >> gen.sh
+#echo "else" >> gen.sh
+#echo "  echo \"No OCFSUBPATH: \$OCFSUBPATH\"" >> gen.sh
+#echo "fi" >> gen.sh
 
 # create the build script for the config file
 echo "#!/bin/bash" > build.sh
@@ -118,7 +118,7 @@ echo "OCFSUBPATH=\`jq --raw-output '.implementation_paths[0]' \${CURPWD}/\${PROJ
 echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> build.sh
 echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
 echo "" >> build.sh
-echo "if [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build.sh
+#echo "if [  \"\$OCFSUBPATH\" == \"/iot-lite\" ]; then" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
@@ -140,13 +140,13 @@ echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/device_build
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "else" >> build.sh
 echo "  No OCFSUBPATH: \$OCFSUBPATH" >> build.sh
-echo "fi" >> build.sh
-echo "" >> build.sh
-echo "cd \$CURPWD" >> build.sh
+#echo "fi" >> build.sh
+#echo "" >> build.sh
+#echo "cd \$CURPWD" >> build.sh
 
 # make scripts executable
 chmod +x ${CURPWD}/Project-Scripts/*.sh
-chmod +x ${CURPWD}/Project-Scripts/IoTivity/*.sh
+#chmod +x ${CURPWD}/Project-Scripts/IoTivity/*.sh
 chmod +x ${CURPWD}/Project-Scripts/IoTivity-lite/*.sh
 
 cd ${CURPWD}
