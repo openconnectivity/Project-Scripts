@@ -19,10 +19,6 @@ eval ${MY_COMMAND}
 
 MY_COMMAND="cd ${OCFPATH}/iotivity-lite/port/${PLATFORM}/"
 eval ${MY_COMMAND}
-MY_COMMAND="idf.py set-target esp32"
-eval ${MY_COMMAND}
-MY_COMMAND="idf.py menuconfig"
-eval ${MY_COMMAND}
 MY_COMMAND="idf.py build"
 eval ${MY_COMMAND}
 
