@@ -29,7 +29,7 @@ CURPWD=`pwd`
 SCRIPTPATH=${CURPWD}/Project-Scripts
 
 if [[ ! (${PATH} == *${SCRIPTPATH}*) ]]; then
-  # update the PATH environment variable: NEED TO RUN THIS SCRIPT WITH "source set_path.sh"
+# update the PATH environment variable: NEED TO RUN THIS SCRIPT WITH "source set_path.sh"
   export PATH=${SCRIPTPATH}:${PATH}
 
   # modify the ~/.bashrc file so things are set correctly on boot
@@ -65,41 +65,41 @@ echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen.sh
 echo "eval \${MY_COMMAND}" >> gen.sh
 echo "pwd" >> gen.sh
 echo "" >> gen.sh
-echo "  if [ ! -e \${CURPWD}/devbuildmake ]; then" >> gen.sh
-echo "    MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/devbuildmake \${CURPWD}/\"" >> gen.sh
-echo "    eval \${MY_COMMAND}" >> gen.sh
-echo "  fi" >> gen.sh
-echo "  MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\" \\\"\${DEVICENAME}\\\"\"" >> gen.sh
+echo "if [ ! -e \${CURPWD}/devbuildmake ]; then" >> gen.sh
+echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/devbuildmake \${CURPWD}/\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "fi" >> gen.sh
+echo "MY_COMMAND=\"sh ./DeviceBuilder_IotivityLiteServer.sh \${CURPWD}/\${PROJNAME}.json \${CURPWD}/device_output \\\"\${DEVICETYPE}\\\" \\\"\${DEVICENAME}\\\"\"" >> gen.sh
+echo "eval \${MY_COMMAND}" >> gen.sh
 echo "" >> gen.sh
-echo "  # copying the introspection file to the include folder" >> gen.sh
-echo "  MY_COMMAND=\"cp -f \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-lite/include/\"" >> gen.sh
+echo "# copying the introspection file to the include folder" >> gen.sh
+echo "MY_COMMAND=\"cp -f \${CURPWD}/device_output/code/server_introspection.dat.h \${OCFPATH}/iotivity-lite/include/\"" >> gen.sh
+echo "eval \${MY_COMMAND}" >> gen.sh
+echo "" >> gen.sh
+echo "if [ ! -f ../pki_certs.zip ]; then" >> gen.sh
+echo "  # only create when the file does not exist" >> gen.sh
+echo "  cd .." >> gen.sh
+echo "  MY_COMMAND=\"sh ./pki.sh\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "fi" >> gen.sh
 echo "" >> gen.sh
-echo "  if [ ! -f ../pki_certs.zip ]; then" >> gen.sh
-echo "    # only create when the file does not exist" >> gen.sh
-echo "    cd .." >> gen.sh
-echo "    MY_COMMAND=\"sh ./pki.sh\"" >> gen.sh
-echo "    eval \${MY_COMMAND}" >> gen.sh
-echo "  fi" >> gen.sh
-echo "" >> gen.sh
-echo "  if [ -e \${CURPWD}/src/\${PROJNAME}.c ];" >> gen.sh
+echo "if [ -e \${CURPWD}/src/\${PROJNAME}.c ];" >> gen.sh
+echo "then" >> gen.sh
+echo "  cp -f \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
+echo "  if cmp -s \${CURPWD}/src/\${PROJNAME}-gen.c \${CURPWD}/src/\${PROJNAME}-old.c ;" >> gen.sh
 echo "  then" >> gen.sh
-echo "    cp -f \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
-echo "    if cmp -s \${CURPWD}/src/\${PROJNAME}-gen.c \${CURPWD}/src/\${PROJNAME}-old.c ;" >> gen.sh
-echo "    then" >> gen.sh
-echo "      echo \"It appears that you have modified the automatically generated source file. src/\${PROJNAME}-gen.c is the file without any of your changes.\"" >> gen.sh
-echo "    else" >> gen.sh
-echo "      echo \"The source file built by DeviceBuilder changed. You can use diff3 to merge your own modifications.\"" >> gen.sh
-echo "      echo \"Example: diff3 -m src/\${PROJNAME}-gen.c src/\${PROJNAME}-old.c src/\${PROJNAME}.c > src/\${PROJNAME}-new.c\"" >> gen.sh
-echo "      echo \"Then: cp -f  src/\${PROJNAME}-gen.c src/\${PROJNAME}-old.c\"" >> gen.sh
-echo "      echo \"And: mv -f  src/\${PROJNAME}-new.c src/\${PROJNAME}.c\"" >> gen.sh
-echo "    fi" >> gen.sh
+echo "    echo \"It appears that you have modified the automatically generated source file. src/\${PROJNAME}-gen.c is the file without any of your changes.\"" >> gen.sh
 echo "  else" >> gen.sh
-echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}.c" >> gen.sh
-echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
-echo "    cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-old.c" >> gen.sh
+echo "    echo \"The source file built by DeviceBuilder changed. You can use diff3 to merge your own modifications.\"" >> gen.sh
+echo "    echo \"Example: diff3 -m src/\${PROJNAME}-gen.c src/\${PROJNAME}-old.c src/\${PROJNAME}.c > src/\${PROJNAME}-new.c\"" >> gen.sh
+echo "    echo \"Then: cp -f src/\${PROJNAME}-gen.c src/\${PROJNAME}-old.c\"" >> gen.sh
+echo "    echo \"And: mv -f src/\${PROJNAME}-new.c src/\${PROJNAME}.c\"" >> gen.sh
 echo "  fi" >> gen.sh
+echo "else" >> gen.sh
+echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}.c" >> gen.sh
+echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
+echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-old.c" >> gen.sh
+echo "fi" >> gen.sh
 
 # create the build script for the config file
 echo "#!/bin/bash" > build.sh
@@ -114,28 +114,42 @@ echo "OCFSUBPATH=\`jq --raw-output '.implementation_paths[0]' \${CURPWD}/\${PROJ
 echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> build.sh
 echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
 echo "" >> build.sh
-echo "#TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
-echo "eval \${MY_COMMAND}" >> build.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.c\"" >> build.sh
-echo "eval \${MY_COMMAND}" >> build.sh
-echo "MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.cpp \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.cpp\"" >> build.sh
-echo "eval \${MY_COMMAND}" >> build.sh
+echo "if [ \"\$PLATFORM\" == \"esp32\"]" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/esp32-example.c\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/main.c\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/pki_certs.h \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/pki_certs.h\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
-echo "MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
-echo "eval \${MY_COMMAND}" >> build.sh
-echo "MY_COMMAND=\"make -f \${CURPWD}/devbuildmake DYNAMIC=1 IPV4=1 device_builder_server\"" >> build.sh
-echo "eval \${MY_COMMAND}" >> build.sh
-echo "#make -f \${CURPWD}/devbuildmake DYNAMIC=1 device_builder_server" >> build.sh
-echo "#uncomment to make the debug version" >> build.sh
-echo "#make -f \${CURPWD}/devbuildmake DYNAMIC=1 DEBUG=1 device_builder_server" >> build.sh
+echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"idf.py build\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
-echo "#TODO remove this command once the above problem is fixed" >> build.sh
-echo "MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/device_builder_server \${CURPWD}/bin/\${PROJNAME}\"" >> build.sh
-echo "eval \${MY_COMMAND}" >> build.sh
-#echo "fi" >> build.sh
-#echo "" >> build.sh
-#echo "cd \$CURPWD" >> build.sh
+echo "else" >> build.sh
+echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.c\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.cpp \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.cpp\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "" >> build.sh
+echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"make -f \${CURPWD}/devbuildmake DYNAMIC=1 IPV4=1 device_builder_server\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  #make -f \${CURPWD}/devbuildmake DYNAMIC=1 device_builder_server" >> build.sh
+echo "  #uncomment to make the debug version" >> build.sh
+echo "  #make -f \${CURPWD}/devbuildmake DYNAMIC=1 DEBUG=1 device_builder_server" >> build.sh
+echo "" >> build.sh
+echo "  #TODO remove this command once the above problem is fixed" >> build.sh
+echo "  MY_COMMAND=\"cp \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/device_builder_server \${CURPWD}/bin/\${PROJNAME}\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "fi" >> build.sh
+
+echo "cd \$CURPWD" >> build.sh
 
 # make scripts executable
 chmod +x ${CURPWD}/Project-Scripts/*.sh
