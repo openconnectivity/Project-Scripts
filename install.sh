@@ -114,7 +114,7 @@ echo "OCFSUBPATH=\`jq --raw-output '.implementation_paths[0]' \${CURPWD}/\${PROJ
 echo "OCFPATH=\"\${OCFBASEPATH}\${OCFSUBPATH}\"" >> build.sh
 echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.json\`" >> build.sh
 echo "" >> build.sh
-echo "if [ \"\$PLATFORM\" == \"esp32\"]" >> build.sh
+echo "if [ \"\$PLATFORM\" == \"esp32\"];" >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/esp32-example.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/main.c\"" >> build.sh
@@ -126,7 +126,6 @@ echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"idf.py build\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "" >> build.sh
 echo "else" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
