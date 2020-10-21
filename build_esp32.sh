@@ -12,7 +12,7 @@ PLATFORM=`jq --raw-output '.platforms[0]' ${CURPWD}/${PROJNAME}-config.json`
 
 if [  "$OCFSUBPATH" == "/iot-lite" ]; then
   #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over.
-  MY_COMMAND="cp ${CURPWD}/src/${PROJNAME}.c ${OCFPATH}/../iotivity-lite/port/main/esp-example.c"
+  MY_COMMAND="cp ${CURPWD}/src/${PROJNAME}.c ${OCFPATH}/../iotivity-lite/port/main/esp32-example.c"
   eval ${MY_COMMAND}
   MY_COMMAND="cp ${CURPWD}/src/${PROJNAME}-main.c ${OCFPATH}/../iotivity-lite/port/main/main.c"
   eval ${MY_COMMAND}
