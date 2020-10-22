@@ -127,6 +127,17 @@ echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"idf.py build\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
+echo "elif [ \"\$PLATFORM\" == \"arduino\" ];" >> build.sh
+echo "then" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/../iotivity-lite/apps/server_devicebuilder.c\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.cpp \${OCFPATH}/../iotivity-lite/apps/server_arduino.cpp\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "" >> build.sh
+echo "  MY_COMMAND=\"cd \${OCFPATH}/../iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "  MY_COMMAND=\"./build_arduino.sh --arch sam --secure\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
 echo "else" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
