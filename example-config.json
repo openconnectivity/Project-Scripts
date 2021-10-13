@@ -8,6 +8,7 @@
     "~/new-imp"
   ],
   "platforms" : [
+    "esp32",
     "linux",
     "windows",
     "android"

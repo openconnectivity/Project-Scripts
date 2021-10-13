@@ -83,22 +83,21 @@ echo "  MY_COMMAND=\"sh ./pki.sh\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "fi" >> gen.sh
 echo "" >> gen.sh
-echo "if [ -e \${CURPWD}/src/\${PROJNAME}.c ];" >> gen.sh
+echo "if [ -e \${CURPWD}/main/\${PROJNAME}.c ];" >> gen.sh
 echo "then" >> gen.sh
-echo "  cp -f \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
-echo "  if cmp -s \${CURPWD}/src/\${PROJNAME}-gen.c \${CURPWD}/src/\${PROJNAME}-old.c ;" >> gen.sh
+echo "  cp -f \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/main/\${PROJNAME}-gen.c" >> gen.sh
+echo "  if cmp -s \${CURPWD}/main/\${PROJNAME}-gen.c \${CURPWD}/main/\${PROJNAME}-old.c ;" >> gen.sh
 echo "  then" >> gen.sh
-echo "    echo \"It appears that you have modified the automatically generated source file. src/\${PROJNAME}-gen.c is the file without any of your changes.\"" >> gen.sh
+echo "    echo \"It appears that you have modified the automatically generated source file. main/\${PROJNAME}-gen.c is the file without any of your changes.\"" >> gen.sh
 echo "  else" >> gen.sh
 echo "    echo \"The source file built by DeviceBuilder changed. You can use diff3 to merge your own modifications.\"" >> gen.sh
-echo "    echo \"Example: diff3 -m src/\${PROJNAME}-gen.c src/\${PROJNAME}-old.c src/\${PROJNAME}.c > src/\${PROJNAME}-new.c\"" >> gen.sh
-echo "    echo \"Then: cp -f src/\${PROJNAME}-gen.c src/\${PROJNAME}-old.c\"" >> gen.sh
-echo "    echo \"And: mv -f src/\${PROJNAME}-new.c src/\${PROJNAME}.c\"" >> gen.sh
+echo "    echo \"Example: diff3 -m main/\${PROJNAME}-gen.c main/\${PROJNAME}-old.c main/\${PROJNAME}.c > main/\${PROJNAME}-new.c\"" >> gen.sh
+echo "    echo \"Then: cp -f main/\${PROJNAME}-gen.c main/\${PROJNAME}-old.c\"" >> gen.sh
+echo "    echo \"And: mv -f main/\${PROJNAME}-new.c main/\${PROJNAME}.c\"" >> gen.sh
 echo "  fi" >> gen.sh
 echo "else" >> gen.sh
-echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}.c" >> gen.sh
-echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-gen.c" >> gen.sh
-echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/src/\${PROJNAME}-old.c" >> gen.sh
+echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/main/\${PROJNAME}.c" >> gen.sh
+echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/main/\${PROJNAME}-gen.c" >> gen.sh
 echo "fi" >> gen.sh
 
 # create the build script for the config file
@@ -116,11 +115,11 @@ echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.
 echo "" >> build.sh
 echo "if [ \"\$PLATFORM\" == \"esp32\" ];" >> build.sh
 echo "then" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/esp32-example.c\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/vscode-esp32-example.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/main.c\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/main.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/pki_certs.h \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/pki_certs.h\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/main/pki_certs.h \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/pki_certs.h\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
@@ -129,9 +128,9 @@ echo "  MY_COMMAND=\"idf.py build\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "elif [ \"\$PLATFORM\" == \"arduino\" ];" >> build.sh
 echo "then" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/../iotivity-lite/apps/server_devicebuilder.c\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}.c \${OCFPATH}/../iotivity-lite/apps/server_devicebuilder.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.cpp \${OCFPATH}/../iotivity-lite/apps/server_arduino.cpp\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}-main.cpp \${OCFPATH}/../iotivity-lite/apps/server_arduino.cpp\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "  MY_COMMAND=\"cd \${OCFPATH}/../iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
@@ -140,11 +139,11 @@ echo "  MY_COMMAND=\"./build_arduino.sh --arch sam --secure\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "else" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.c\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/src/\${PROJNAME}-main.cpp \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.cpp\"" >> build.sh
+echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}-main.cpp \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.cpp\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build.sh

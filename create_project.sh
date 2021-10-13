@@ -3,8 +3,7 @@ PROJNAME=$1
 CURPWD=`pwd`
 
 mkdir -p ./${PROJNAME}
-mkdir -p ./${PROJNAME}/src
-mkdir -p ./${PROJNAME}/bin
+mkdir -p ./${PROJNAME}/main
 
 cd ${PROJNAME}
 echo "{" > ${PROJNAME}-config.json
@@ -13,10 +12,10 @@ echo "  \"device_type\" : \"oic.d.switchdevice\"," >> ${PROJNAME}-config.json
 echo "  \"ocf_base_path\" : \"~\"," >> ${PROJNAME}-config.json
 echo "  \"implementation_paths\" : [" >> ${PROJNAME}-config.json
 echo "    \"/iot-lite\"," >> ${PROJNAME}-config.json
-echo "    \"/iot\"," >> ${PROJNAME}-config.json
 echo "    \"~/new-imp\"" >> ${PROJNAME}-config.json
 echo "  ]," >> ${PROJNAME}-config.json
 echo "  \"platforms\" : [" >> ${PROJNAME}-config.json
+echo "    \"esp32\"," >> ${PROJNAME}-config.json
 echo "    \"linux\"," >> ${PROJNAME}-config.json
 echo "    \"windows\"," >> ${PROJNAME}-config.json
 echo "    \"android\"" >> ${PROJNAME}-config.json
