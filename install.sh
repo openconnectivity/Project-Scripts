@@ -143,8 +143,6 @@ echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}.c \${OCFPATH}/iotivity-lite
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
-echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}-main.cpp \${OCFPATH}/iotivity-lite/apps/device_builder_server-main.cpp\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
 echo "" >> build.sh
 echo "  MY_COMMAND=\"cd \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh

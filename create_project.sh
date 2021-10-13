@@ -36,4 +36,8 @@ echo "    }" >> ${PROJNAME}-config.json
 echo "  ]" >> ${PROJNAME}-config.json
 echo "}" >> ${PROJNAME}-config.json
 
+echo "bin\/" > .gitignore
+echo "device_output\/" >> .gitignore
+echo "build\/" >> .gitignore
+
 cd ${CURPWD}
