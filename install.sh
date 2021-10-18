@@ -63,14 +63,14 @@ echo "" >> gen.sh
 echo "# The lines above parse the config file and set everything up for the normal gen.sh stuff below" >> gen.sh
 echo "if [ \"\$PLATFORM\" == \"esp32\" ];" >> gen.sh
 echo "then" >> gen.sh
-echo "  MY_COMMAND=\"cp -f ~/Project-Scripts/settings-esp32.json \${CURPWD}/settings.json\"" >> gen.sh
+echo "  MY_COMMAND=\"cp -f ~/Project-Scripts/settings-esp32.json \${CURPWD}/.vscode/settings.json\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "elif [ \"\$PLATFORM\" == \"arduino\" ];" >> gen.sh
 echo "then" >> gen.sh
-echo "  MY_COMMAND=\"cp -f ~/Project-Scripts/settings-arduino.json \${CURPWD}/settings.json\"" >> gen.sh
+echo "  MY_COMMAND=\"cp -f ~/Project-Scripts/settings-arduino.json \${CURPWD}/.vscode/settings.json\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "else" >> gen.sh
-echo "  MY_COMMAND=\"cp -f ~/Project-Scripts/settings-linux.json \${CURPWD}/settings.json\"" >> gen.sh
+echo "  MY_COMMAND=\"cp -f ~/Project-Scripts/settings-linux.json \${CURPWD}/.vscode/settings.json\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "fi" >> gen.sh
 echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen.sh
