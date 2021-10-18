@@ -12,6 +12,8 @@ PLATFORM=`jq --raw-output '.platforms[0]' ${CURPWD}/${PROJNAME}-config.json`
 
 if [ "$PLATFORM" == "esp32" ];
 then
+  MY_COMMAND="cp ~/Project-Scripts/settings-esp32.json ${CURPWD}/settings.json"
+  eval ${MY_COMMAND}
   MY_COMMAND="cp ${CURPWD}/main/${PROJNAME}.c ${OCFPATH}/iotivity-lite/port/${PLATFORM}/main/vscode-esp32-example.c"
   eval ${MY_COMMAND}
   MY_COMMAND="cp ${CURPWD}/main/${PROJNAME}-main.c ${OCFPATH}/iotivity-lite/port/${PLATFORM}/main/main.c"
@@ -35,6 +37,8 @@ then
   MY_COMMAND="./build_arduino.sh --arch sam --secure"
   eval ${MY_COMMAND}
 else
+  MY_COMMAND="cp ~/Project-Scripts/settings-linux.json ${CURPWD}/settings.json"
+  eval ${MY_COMMAND}
   #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over.
   MY_COMMAND="cp ${CURPWD}/main/${PROJNAME}.c ${OCFPATH}/iotivity-lite/apps/device_builder_server.c"
   eval ${MY_COMMAND}

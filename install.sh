@@ -99,6 +99,19 @@ echo "else" >> gen.sh
 echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/main/\${PROJNAME}.c" >> gen.sh
 echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/main/\${PROJNAME}-gen.c" >> gen.sh
 echo "fi" >> gen.sh
+echo "if [ \"\$PLATFORM\" == \"esp32\" ];" >> build.sh
+echo "then" >> build.sh
+echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-esp32.json \${CURPWD}/settings.json\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "elif [ \"\$PLATFORM\" == \"arduino\" ];" >> build.sh
+echo "then" >> build.sh
+echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-arduino.json \${CURPWD}/settings.json\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "else" >> build.sh
+echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-linux.json \${CURPWD}/settings.json\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
+echo "fi" >> build.sh
+
 
 # create the build script for the config file
 echo "#!/bin/bash" > build.sh
@@ -115,8 +128,6 @@ echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.
 echo "" >> build.sh
 echo "if [ \"\$PLATFORM\" == \"esp32\" ];" >> build.sh
 echo "then" >> build.sh
-echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-esp32.json \${CURPWD}/settings.json\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/vscode-esp32-example.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/main.c\"" >> build.sh
@@ -140,8 +151,6 @@ echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"./build_arduino.sh --arch sam --secure\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "else" >> build.sh
-echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-linux.json \${CURPWD}/settings.json\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
