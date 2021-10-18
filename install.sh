@@ -115,6 +115,8 @@ echo "PLATFORM=\`jq --raw-output '.platforms[0]' \${CURPWD}/\${PROJNAME}-config.
 echo "" >> build.sh
 echo "if [ \"\$PLATFORM\" == \"esp32\" ];" >> build.sh
 echo "then" >> build.sh
+echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-esp32.json \${CURPWD}/settings.json\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/vscode-esp32-example.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}-main.c \${OCFPATH}/iotivity-lite/port/\${PLATFORM}/main/main.c\"" >> build.sh
@@ -138,6 +140,8 @@ echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  MY_COMMAND=\"./build_arduino.sh --arch sam --secure\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
 echo "else" >> build.sh
+echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-linux.json \${CURPWD}/settings.json\"" >> build.sh
+echo "  eval \${MY_COMMAND}" >> build.sh
 echo "  #TODO change this to compile from the project source direcotry, but temporarily copy the souce code over." >> build.sh
 echo "  MY_COMMAND=\"cp \${CURPWD}/main/\${PROJNAME}.c \${OCFPATH}/iotivity-lite/apps/device_builder_server.c\"" >> build.sh
 echo "  eval \${MY_COMMAND}" >> build.sh
