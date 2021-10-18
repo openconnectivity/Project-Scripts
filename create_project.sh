@@ -37,6 +37,8 @@ echo "    }" >> ${PROJNAME}-config.json
 echo "  ]" >> ${PROJNAME}-config.json
 echo "}" >> ${PROJNAME}-config.json
 
+mkdir main
+
 echo "bin\/" > .gitignore
 echo "device_output\/" >> .gitignore
 echo "build\/" >> .gitignore
