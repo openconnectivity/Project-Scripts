@@ -15,6 +15,18 @@ PLATFORM=`jq --raw-output '.platforms[0]' ${CURPWD}/${PROJNAME}-config.json`
 jq --raw-output '.device_description' ${CURPWD}/${PROJNAME}-config.json > ${CURPWD}/${PROJNAME}.json
 
 # The lines above parse the config file and set everything up for the normal gen.sh stuff below
+if [ "$PLATFORM" == "esp32" ];
+then
+  MY_COMMAND="cp ~/Project-Scripts/settings-esp32.json ${CURPWD}/settings.json"
+  eval ${MY_COMMAND}
+elif [ "$PLATFORM" == "arduino" ];
+then
+  MY_COMMAND="cp ~/Project-Scripts/settings-arduino.json ${CURPWD}/settings.json"
+  eval ${MY_COMMAND}
+else
+  MY_COMMAND="cp ~/Project-Scripts/settings-linux.json ${CURPWD}/settings.json"
+  eval ${MY_COMMAND}
+fi
 MY_COMMAND="cd ${OCFPATH}/DeviceBuilder"
 eval ${MY_COMMAND}
 pwd
