@@ -3,7 +3,6 @@ PROJNAME=$1
 CURPWD=`pwd`
 
 mkdir -p ./${PROJNAME}
-mkdir -p ./${PROJNAME}/main
 mkdir -p ./${PROJNAME}/.vscode
 cp ~/Project-Scripts/settings.json ./${PROJNAME}/.vscode
 

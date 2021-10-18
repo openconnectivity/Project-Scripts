@@ -70,7 +70,11 @@ echo "then" >> gen.sh
 echo "  MY_COMMAND=\"cp -f ~/Project-Scripts/settings-arduino.json \${CURPWD}/.vscode/settings.json\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "else" >> gen.sh
+echo "  MY_COMMAND=\"mkdir -p ./\${PROJNAME}/bin\"" >> >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "  MY_COMMAND=\"cp -f ~/Project-Scripts/settings-linux.json \${CURPWD}/.vscode/settings.json\"" >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "  MY_COMMAND=\"cp -f ~/Project-Scripts/devbuildmake \${CURPWD}\"" >> gen.sh
 echo "  eval \${MY_COMMAND}" >> gen.sh
 echo "fi" >> gen.sh
 echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen.sh

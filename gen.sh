@@ -24,7 +24,7 @@ then
   MY_COMMAND="cp -f ~/Project-Scripts/settings-arduino.json ${CURPWD}/.vscode/settings.json"
   eval ${MY_COMMAND}
 else
-  MY_COMMAND="cp -f ~/Project-Scripts/settings-esp32.json ${CURPWD}/.vscode/settings.json"
+  MY_COMMAND="cp -f ~/Project-Scripts/settings-linux.json ${CURPWD}/.vscode/settings.json"
   eval ${MY_COMMAND}
 fi
 MY_COMMAND="cd ${OCFPATH}/DeviceBuilder"
