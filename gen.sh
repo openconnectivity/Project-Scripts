@@ -24,7 +24,7 @@ then
   MY_COMMAND="cp -f ~/Project-Scripts/settings-arduino.json ${CURPWD}/.vscode/settings.json"
   eval ${MY_COMMAND}
 else
-  MY_COMMAND="mkdir -p ./${PROJNAME}/bin"
+  MY_COMMAND="mkdir -p ./bin"
   eval ${MY_COMMAND}
   MY_COMMAND="cp -f ~/Project-Scripts/settings-linux.json ${CURPWD}/.vscode/settings.json"
   eval ${MY_COMMAND}
