@@ -61,6 +61,18 @@ echo "# extract device description and create input file from config file" >> ge
 echo "jq --raw-output '.device_description' \${CURPWD}/\${PROJNAME}-config.json > \${CURPWD}/\${PROJNAME}.json" >> gen.sh
 echo "" >> gen.sh
 echo "# The lines above parse the config file and set everything up for the normal gen.sh stuff below" >> gen.sh
+echo "if [ \"\$PLATFORM\" == \"esp32\" ];" >> gen.sh
+echo "then" >> gen.sh
+echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-esp32.json \${CURPWD}/settings.json\"" >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "elif [ \"\$PLATFORM\" == \"arduino\" ];" >> gen.sh
+echo "then" >> gen.sh
+echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-arduino.json \${CURPWD}/settings.json\"" >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "else" >> gen.sh
+echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-linux.json \${CURPWD}/settings.json\"" >> gen.sh
+echo "  eval \${MY_COMMAND}" >> gen.sh
+echo "fi" >> gen.sh
 echo "MY_COMMAND=\"cd \${OCFPATH}/DeviceBuilder\"" >> gen.sh
 echo "eval \${MY_COMMAND}" >> gen.sh
 echo "pwd" >> gen.sh
@@ -99,19 +111,6 @@ echo "else" >> gen.sh
 echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/main/\${PROJNAME}.c" >> gen.sh
 echo "  cp \${CURPWD}/device_output/code/simpleserver.c \${CURPWD}/main/\${PROJNAME}-gen.c" >> gen.sh
 echo "fi" >> gen.sh
-echo "if [ \"\$PLATFORM\" == \"esp32\" ];" >> build.sh
-echo "then" >> build.sh
-echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-esp32.json \${CURPWD}/settings.json\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "elif [ \"\$PLATFORM\" == \"arduino\" ];" >> build.sh
-echo "then" >> build.sh
-echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-arduino.json \${CURPWD}/settings.json\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "else" >> build.sh
-echo "  MY_COMMAND=\"cp ~/Project-Scripts/settings-linux.json \${CURPWD}/settings.json\"" >> build.sh
-echo "  eval \${MY_COMMAND}" >> build.sh
-echo "fi" >> build.sh
-
 
 # create the build script for the config file
 echo "#!/bin/bash" > build.sh
